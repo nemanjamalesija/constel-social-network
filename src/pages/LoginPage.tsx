@@ -1,5 +1,5 @@
 import { loginValidator } from '../features/login/InputValidation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ZodError } from 'zod';
 import Logo from '../utils/logo';
 import FormLabel from '../features/login/FormLabel';
@@ -8,6 +8,8 @@ import LogInButton from '../features/login/LogInButton';
 import FormInput from '../features/login/FormInput';
 import ErrorMessage from '../features/login/ErrorMessage';
 import logInUser from '../api/logInUser';
+import { useAppSelector } from '../hooks/useAppSelector';
+import { useNavigate } from 'react-router';
 
 type ErrorType = { type: string; message: string };
 
@@ -15,6 +17,13 @@ const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+
+    if (jwt) navigate('/home');
+  }, [navigate]);
 
   const logIn = async (email: string, password: string) => {
     try {
