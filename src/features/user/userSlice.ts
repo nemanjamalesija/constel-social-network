@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import getCurrentUser from '../../api/getCurrentUser';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   username: '',
@@ -9,43 +8,19 @@ const initialState = {
   error: '',
 };
 
-export const getUser = createAsyncThunk('', async function () {
-  const currentUser = await getCurrentUser();
-  if (!currentUser) return;
-  const {
-    account: { username, full_name, picture },
-  } = currentUser;
-
-  return { username, full_name, picture };
-});
-
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    updateName(state, action) {
-      state.username = action.payload;
+    setUser(state, action) {
+      state.username = action.payload?.username;
+      state.fullName = action.payload?.full_name;
+      state.picture = action.payload?.picture;
     },
   },
-  extraReducers: (builder) =>
-    builder
-      .addCase(getUser.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(getUser.fulfilled, (state, action) => {
-        state.username = action.payload?.username;
-        state.fullName = action.payload?.full_name;
-        state.picture = action.payload?.picture;
-        state.status = 'idle';
-      })
-      .addCase(getUser.rejected, (state) => {
-        state.status = 'error';
-
-        state.error = 'Could not get the user';
-      }),
 });
 
 export const userReducer = userSlice.reducer;
-export const { updateName } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

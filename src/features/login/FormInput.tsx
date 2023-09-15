@@ -20,9 +20,9 @@ const FormInput = ({
     <input
       id={id}
       className={clsx(
-        'block w-full border-0 py-3 px-4 rounded-lg align-middle text-gray-900 text-xs lg:text-sm shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset outline-none focus:ring-blue-500',
+        'block w-full border-0 py-3 px-4 rounded-lg align-middle text-figmaBlack text-xs lg:text-sm shadow-sm ring-1 ring-inset ring-figmaGrayShade placeholder:text-figmaGrayShade focus:ring-2 focus:ring-inset outline-none',
         {
-          'ring-red-500': errorType != null,
+          'ring-figmaRed': errorType != null,
         }
       )}
       placeholder={placeholder}

@@ -1,24 +1,44 @@
-import { ReactNode, useEffect } from 'react';
-import { getUser } from '../features/user/userSlice';
+import { ReactNode, useEffect, useState } from 'react';
+import { setUser } from '../features/user/userSlice';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import Spinner from './Spinner';
 import { useNavigate } from 'react-router';
+import getCurrentUser from '../api/getCurrentUser';
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
-  const dispatch = useAppDispatch();
   const fullName = useAppSelector((state) => state.userReducer.fullName);
-  const status = useAppSelector((state) => state.userReducer.status);
-  if (!fullName) dispatch(getUser());
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (status != 'loading' && !fullName) navigate('/login');
-  }, [status, fullName, navigate]);
+    const getUser = async () => {
+      const jwt = localStorage.getItem('jwt');
+      if (!jwt) return navigate('/login');
 
-  if (status == 'loading') return <Spinner />;
+      try {
+        setLoading(true);
+        const currentUser = await getCurrentUser();
+        if (!currentUser) return;
+        const {
+          account: { username, full_name, picture },
+        } = currentUser;
 
-  return children;
+        dispatch(setUser({ username, full_name, picture }));
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        setLoading(false);
+      }
+    };
+
+    if (!fullName) getUser();
+  }, [fullName, dispatch, navigate]);
+
+  if (loading) return <Spinner />;
+
+  if (fullName) return children;
 }
 
 export default ProtectedRoute;

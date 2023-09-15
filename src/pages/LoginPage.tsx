@@ -8,7 +8,6 @@ import LogInButton from '../features/login/LogInButton';
 import FormInput from '../features/login/FormInput';
 import ErrorMessage from '../features/login/ErrorMessage';
 import logInUser from '../api/logInUser';
-import { useAppSelector } from '../hooks/useAppSelector';
 import { useNavigate } from 'react-router';
 
 type ErrorType = { type: string; message: string };

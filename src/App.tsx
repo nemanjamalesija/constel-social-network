@@ -9,7 +9,6 @@ import HomePage from './pages/HomePage';
 import ProtectedRoute from './ui/ProtectedRoute';
 
 function App() {
-  console.log('aa');
   return (
     <Router>
       <Routes>
