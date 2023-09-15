@@ -3,10 +3,13 @@ import { useState } from 'react';
 import { ZodError } from 'zod';
 import { baseUrl } from '../utils/baseUrl';
 import Logo from '../utils/logo';
-import FormLabel from '../ui/FormLabel';
+import FormLabel from './FormLabel';
 import formatZodError from '../helpers/formatZodError';
-import LogInButton from '../ui/LogInButton';
+import LogInButton from './LogInButton';
 import { clsx } from 'clsx';
+import FormInput from './FormInput';
+import ErrorMessage from './ErrorMessage';
+import logInUser from '../api/logInUser';
 
 type ErrorType = { type: string; message: string };
 
@@ -15,6 +18,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
 
+  // this returns boolean, and log in button can accept it as disabled prop value in order to prevent user to submit credentials before passing the validation
   const allFieldsCompleted = loginValidator.safeParse({
     email,
     password,
@@ -26,35 +30,28 @@ const LoginPage = () => {
         email,
         password,
       });
-      tryUser.password;
 
-      const response = await fetch(`${baseUrl}/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: tryUser.email,
-          password: tryUser.password,
-        }),
-      });
+      const { status, error } = await logInUser(
+        tryUser.email,
+        tryUser.password
+      );
 
-      const data = await response.json();
-      console.log(data);
+      if (status !== 'ok') {
+        setError({ type: 'server', message: error.message });
+        return;
+      }
     } catch (error) {
       if (error instanceof ZodError) {
         const formatedError = formatZodError(error);
-        console.log(formatedError);
 
         if (formatedError.includes('email'))
-          setError({ type: 'email error', message: formatedError });
-
-        if (formatedError.includes('Password')) {
-          setError({ type: 'password error', message: formatedError });
+          setError({ type: 'email', message: formatedError });
+        else {
+          setError({ type: 'password', message: formatedError });
         }
       } else {
         setError({
-          type: 'server error',
+          type: 'server',
           message: 'Oops, something went wrong',
         });
       }
@@ -75,39 +72,33 @@ const LoginPage = () => {
         >
           <div className='mb-6'>
             <FormLabel forProp='Email' />
-            <input
+            <FormInput
               id='Email'
-              type='text'
-              className={clsx(
-                'block w-full border-0 py-3 px-4 rounded-lg align-middle text-gray-900 text-xs lg:text-sm shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset outline-none focus:ring-blue-500',
-                {
-                  'ring-red-500': error.type == 'email error',
-                }
-              )}
-              placeholder='Enter email here...'
+              placeholder='Enter your email here...'
+              errorType={error.type == 'email' ? error.type : null}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              setter={setEmail}
             />
-            {error.type == 'email error' && <p>{error.message}</p>}
+            {error.type == 'email' && (
+              <ErrorMessage type={error.type} message={error.message} />
+            )}
           </div>
           <div>
             <FormLabel forProp='Password' />
-            <input
-              id='password'
-              className={clsx(
-                'block w-full border-0 py-3 px-4 rounded-lg align-middle text-gray-900 text-xs lg:text-sm shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset outline-none focus:ring-blue-500',
-                {
-                  'ring-red-500': error.type == 'password error',
-                }
-              )}
-              placeholder='Enter password here...'
+            <FormInput
+              id='Password'
+              placeholder='Enter your password here...'
+              errorType={error.type == 'password' ? error.type : null}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              setter={setPassword}
             />
-            {error.type == 'password error' && <p>{error.message}</p>}
+            {error.type == 'password' && (
+              <ErrorMessage type={error.type} message={error.message} />
+            )}
           </div>
+          {error.type == 'server' && (
+            <ErrorMessage type={error.type} message={error.message} />
+          )}
           <div className='text-center'>
             <LogInButton />
           </div>
