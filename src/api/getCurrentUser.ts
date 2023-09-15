@@ -3,6 +3,8 @@ import { baseUrl } from '../utils/baseUrl';
 export default async function getCurrentUser() {
   const jwt = localStorage.getItem('jwt');
 
+  if (!jwt) return;
+
   const response = await fetch(`${baseUrl}/accounts/me`, {
     method: 'GET',
     headers: {

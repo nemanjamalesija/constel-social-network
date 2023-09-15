@@ -1,12 +1,10 @@
 import { loginValidator } from '../features/login/InputValidation';
 import { useState } from 'react';
 import { ZodError } from 'zod';
-import { baseUrl } from '../utils/baseUrl';
 import Logo from '../utils/logo';
 import FormLabel from '../features/login/FormLabel';
 import formatZodError from '../helpers/formatZodError';
 import LogInButton from '../features/login/LogInButton';
-import { clsx } from 'clsx';
 import FormInput from '../features/login/FormInput';
 import ErrorMessage from '../features/login/ErrorMessage';
 import logInUser from '../api/logInUser';
@@ -17,13 +15,6 @@ const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
-
-  // this returns boolean, and log in button can accept it as disabled prop value in order to prevent user to submit credentials before passing the validation
-
-  // const allFieldsCompleted = loginValidator.safeParse({
-  //   email,
-  //   password,
-  // }).success;
 
   const logIn = async (email: string, password: string) => {
     try {

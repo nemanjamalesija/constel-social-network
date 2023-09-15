@@ -6,14 +6,22 @@ import {
 } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import ProtectedRoute from './ui/ProtectedRoute';
 
 function App() {
+  console.log('aa');
   return (
     <Router>
       <Routes>
-        <Route path='/home' element={<HomePage />} />
+        <Route
+          path='/home'
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/login' element={<LoginPage />} />
-
         <Route path='/' element={<Navigate to='/home' replace />} />
       </Routes>
     </Router>

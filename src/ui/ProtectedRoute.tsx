@@ -1,33 +1,19 @@
-// import styled from 'styled-components';
-// import { useUser } from '../features/authentication/useUser';
-// import Spinner from './Spinner';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { ReactNode } from 'react';
+import { getUser } from '../features/user/userSlice';
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { useAppSelector } from '../hooks/useAppSelector';
+import Spinner from './Spinner';
 
-function ProtectedRoute({ children }) {
-  const navigate = useNavigate();
+function ProtectedRoute({ children }: { children: ReactNode }) {
+  const dispatch = useAppDispatch();
+  const fullName = useAppSelector((state) => state.userReducer.fullName);
+  const status = useAppSelector((state) => state.userReducer.status);
 
-  // 1. Load the authenticated user
-  const { isLoading, isAuthenticated } = useUser();
+  if (!fullName) dispatch(getUser());
 
-  // 2. If there is NO authenticated user, redirect to the /login
-  useEffect(
-    function () {
-      if (!isAuthenticated && !isLoading) navigate('/login');
-    },
-    [isAuthenticated, isLoading, navigate]
-  );
+  if (status == 'loading') return <Spinner />;
 
-  // 3. While loading, show a spinner
-  // if (isLoading)
-  //   return (
-  //     <FullPage>
-  //       <Spinner />
-  //     </FullPage>
-  //   );
-
-  // 4. If there IS a user, render the app
-  if (isAuthenticated) return children;
+  return children;
 }
 
 export default ProtectedRoute;
