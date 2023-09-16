@@ -1,6 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
-import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons/faHeart';
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 import Modal from './Modal';
 import PostComments from '../features/posts/PostWithComments';
