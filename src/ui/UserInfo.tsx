@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePost } from './PostContext';
+import { usePost } from '../features/posts/PostContext';
 
 type UserInfoType = {
   full_name: string;

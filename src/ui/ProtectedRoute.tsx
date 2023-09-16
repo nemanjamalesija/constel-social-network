@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 import getCurrentUser from '../api/getCurrentUser';
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
-  const fullName = useAppSelector((state) => state.userReducer.fullName);
+  const full_name = useAppSelector((state) => state.userReducer.full_name);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
@@ -34,12 +34,12 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
       }
     };
 
-    if (!fullName) getUser();
-  }, [fullName, dispatch, navigate]);
+    if (!full_name) getUser();
+  }, [full_name, dispatch, navigate]);
 
   if (loading) return <Spinner />;
 
-  if (fullName) return children;
+  if (full_name) return children;
 }
 
 export default ProtectedRoute;

@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 import getAllComments from '../../api/getAllComments';
-import { usePost } from './PostContext';
-import UserInfo from './UserInfo';
-import PostDate from './PostDate';
+import { usePost } from '../posts/PostContext';
+import UserInfo from '../../ui/UserInfo';
+import PostDate from '../../ui/PostDate';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { useGetUserData } from '../../hooks/useGetUserData';
+import Spinner from '../../ui/Spinner';
+import { useGetCommentsData } from '../../hooks/useGetCommentsData';
+import { setComments } from './commentsSlice';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 type CommentType = {
   comment_id: string;
@@ -18,20 +23,25 @@ type CommentType = {
 
 const Comments = () => {
   const { post_id } = usePost();
-  const username = useAppSelector((state) => state.userReducer.username);
-  const [comments, setComments] = useState([] as CommentType[]);
+  const { username } = useGetUserData();
+  const dispatch = useAppDispatch();
+  const { comments } = useGetCommentsData();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
+
       const commentsAPI = await getAllComments(post_id);
       if (!commentsAPI) return;
 
       const { comments } = commentsAPI;
-      setComments(comments);
+      dispatch(setComments(comments));
+      setLoading(false);
     })();
   }, []);
 
-  console.log(comments);
+  if (loading) return <Spinner />;
 
   return (
     <div>

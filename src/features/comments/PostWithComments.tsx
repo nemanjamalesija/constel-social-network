@@ -1,13 +1,14 @@
 import getSinglePost from '../../api/getSinglePost';
 import Spinner from '../../ui/Spinner';
-import { usePost } from './PostContext';
-import UserInfo from './UserInfo';
-import PostDate from './PostDate';
+import { usePost } from '../posts/PostContext';
+import UserInfo from '../../ui/UserInfo';
+import PostDate from '../../ui/PostDate';
 import { useEffect, useState } from 'react';
 import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
 import WriteComment from './WriteComment';
 import Comments from './Comments';
+import { setPosts } from '../posts/postsSlice';
 
 type PostWithCommentsType = {
   audio: string | null;
@@ -61,7 +62,7 @@ const PostWithComments = () => {
       )}
       <PostDate created_at={post.created_at} />
       <p className='text-[15px] text-figmaBlack my-3'>{post.text}</p>
-      <WriteComment />
+      <WriteComment id={post.post_id} />
       <div className='flex gap-2 mb-4'>
         <LikeButton />
         <CommentButton type='dummy' />

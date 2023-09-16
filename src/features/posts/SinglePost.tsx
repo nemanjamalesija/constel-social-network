@@ -1,6 +1,6 @@
 import { usePost } from './PostContext';
-import UserInfo from './UserInfo';
-import PostDate from './PostDate';
+import UserInfo from '../../ui/UserInfo';
+import PostDate from '../../ui/PostDate';
 import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
 

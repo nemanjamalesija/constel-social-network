@@ -8,10 +8,11 @@ import SinglePost from '../features/posts/SinglePost';
 import Sidebar from '../ui/Sidebar';
 import { PostProvider } from '../features/posts/PostContext';
 import { PostType } from '../types/postType';
+import { useGetPostsData } from '../hooks/useGetPostsData';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector((state) => state.postsReducer.posts);
+  const { posts } = useGetPostsData();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

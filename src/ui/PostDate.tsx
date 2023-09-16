@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
-import formatDate from '../../helpers/formatDate';
+import formatDate from '../helpers/formatDate';
 
 const PostDate = ({ created_at }: { created_at: string }) => {
   return (

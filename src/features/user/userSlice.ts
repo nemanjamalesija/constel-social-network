@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   username: '',
-  fullName: '',
+  full_name: '',
   picture: '',
   status: 'idle',
   error: '',
@@ -14,7 +14,7 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       state.username = action.payload?.username;
-      state.fullName = action.payload?.full_name;
+      state.full_name = action.payload?.full_name;
       state.picture = action.payload?.picture;
     },
   },
