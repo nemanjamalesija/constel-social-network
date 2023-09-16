@@ -10,7 +10,7 @@ const WritePost = () => {
   const { full_name, picture } = useGetUserData();
 
   return (
-    <div className='bg-figmaGray py-4 px-6 rounded-lg'>
+    <section className='bg-figmaGray py-4 px-6 rounded-lg'>
       <div className='flex gap-5'>
         <UserImage
           picture={picture}
@@ -30,7 +30,7 @@ const WritePost = () => {
           </div>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 

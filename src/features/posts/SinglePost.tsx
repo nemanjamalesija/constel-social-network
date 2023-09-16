@@ -4,8 +4,9 @@ import PostDate from '../../ui/PostDate';
 import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
+import { memo } from 'react';
 
-const SinglePost = () => {
+const SinglePost = memo(() => {
   const {
     audio,
     image,
@@ -41,6 +42,6 @@ const SinglePost = () => {
       </div>
     </article>
   );
-};
+});
 
 export default SinglePost;

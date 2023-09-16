@@ -4,6 +4,7 @@ import {
   useContext,
   cloneElement,
   ReactNode,
+  ReactElement,
 } from 'react';
 import Overlay from '../../ui/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,7 +50,9 @@ function Window({ children, name }: { children: ReactNode; name: string }) {
           />
         </button>
 
-        <div>{cloneElement(children, { onCloseModal: close })}</div>
+        <div>
+          {cloneElement(children as ReactElement, { onCloseModal: close })}
+        </div>
       </div>
     </div>,
     document.body
