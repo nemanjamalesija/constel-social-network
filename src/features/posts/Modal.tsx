@@ -5,7 +5,7 @@ import {
   cloneElement,
   ReactNode,
 } from 'react';
-import Overlay from './Overlay';
+import Overlay from '../../ui/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { createPortal } from 'react-dom';

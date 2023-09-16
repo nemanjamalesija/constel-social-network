@@ -64,7 +64,7 @@ const WriteComment = ({ id }: { id: string }) => {
     >
       <input
         type='text'
-        className='py-2 border-b border-figmaGrayShade w-full  placeholder:text-figmaGrayShade bg-figmaGray outline-none'
+        className='input-comment py-2 border-b border-figmaGrayShade w-full placeholder:text-figmaGrayShade bg-figmaGray outline-none focus:border-figmaBlue'
         placeholder='Write a comment'
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
@@ -72,7 +72,7 @@ const WriteComment = ({ id }: { id: string }) => {
       <button type='submit' className='-ml-4'>
         <FontAwesomeIcon
           icon={faPaperPlane}
-          className='text-figmaGrayShade hover:text-figmaGrayShade2 transition-all duration-200 text-xl'
+          className='text-figmaGrayShade transition-all duration-200 text-xl'
         />
       </button>
     </form>

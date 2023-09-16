@@ -4,7 +4,7 @@ import { ZodError } from 'zod';
 import Logo from '../ui/logo';
 import FormLabel from '../features/login/FormLabel';
 import formatZodError from '../helpers/formatZodError';
-import LogInButton from '../features/login/LogInButton';
+import ActionButton from '../ui/ActionButton';
 import FormInput from '../features/login/FormInput';
 import ErrorMessage from '../features/login/ErrorMessage';
 import logInUser from '../api/logInUser';
@@ -18,7 +18,7 @@ const LoginPage = () => {
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
   const navigate = useNavigate();
 
-  // this line returns boollean and controls the disabled prop on the log in button (<LogInButton />). Remove the disabled prop to see input error handling
+  // this line returns boollean and controls the disabled prop on the log in button (<ActionButton />). Remove the disabled prop to see input error handling
 
   const allFieldsCompleted = loginValidator.safeParse({
     email,
@@ -113,7 +113,9 @@ const LoginPage = () => {
             <ErrorMessage type={error.type} message={error.message} />
           )}
           <div className='text-center'>
-            <LogInButton disabled={!allFieldsCompleted} />
+            <ActionButton className='mt-6' disabled={!allFieldsCompleted}>
+              Log in
+            </ActionButton>
           </div>
         </form>
       </div>

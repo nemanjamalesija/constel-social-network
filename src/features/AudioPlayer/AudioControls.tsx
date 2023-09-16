@@ -2,13 +2,16 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { faPause } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons';
 
 const AudioControls = ({
   playing,
   setIsPlaying,
+  type,
 }: {
   playing: boolean;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
+  type: string;
 }) => {
   const classBase =
     'h-10 w-10 rounded-full flex items-center justify-center text-white transition-all duration-200';
@@ -31,7 +34,12 @@ const AudioControls = ({
           onClick={() => setIsPlaying(true)}
           aria-label='Play'
         >
-          <FontAwesomeIcon icon={faPlay} className='text-xl' />
+          {type == 'listen' && (
+            <FontAwesomeIcon icon={faPlay} className='text-xl' />
+          )}
+          {type == 'record' && (
+            <FontAwesomeIcon icon={faMicrophone} className='text-xl' />
+          )}
         </button>
       )}
     </div>

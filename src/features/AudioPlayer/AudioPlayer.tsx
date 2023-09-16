@@ -76,7 +76,11 @@ const AudioPlayer = ({ audioSrc }: { audioSrc: any }) => {
       <audio src={audioSrc}></audio>
 
       <div className='flex items-center gap-4 h-full '>
-        <AudioControls playing={playing} setIsPlaying={setPlaying} />
+        <AudioControls
+          playing={playing}
+          setIsPlaying={setPlaying}
+          type='listen'
+        />
         <input
           type='range'
           value={trackProgress}

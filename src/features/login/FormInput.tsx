@@ -22,7 +22,7 @@ const FormInput = ({
       id={id}
       type={type}
       className={`
-      block w-full border-0 py-3 px-4 rounded-lg align-middle text-figmaBlack text-xs lg:text-sm shadow-sm ring-1 ring-inset ring-figmaGrayShade placeholder:text-figmaGrayShade focus:ring-2 focus:ring-inset outline-none
+      block w-full border-0 py-3 px-4 rounded-lg align-middle text-figmaBlack text-xs lg:text-sm shadow-sm ring-1 ring-inset ring-figmaGrayShade placeholder:text-figmaGrayShade focus:ring-figmaBlue focus:ring-inset outline-none
        ${errorType != null ? 'ring-figmaRed' : ''}
       `}
       placeholder={placeholder}

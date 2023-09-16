@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
-import Modal from './Modal';
+import Modal from '../features/posts/Modal';
 import PostComments from '../features/posts/PostModal';
 import { usePost } from '../features/posts/PostContext';
 

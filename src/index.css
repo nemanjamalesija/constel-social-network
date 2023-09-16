@@ -51,3 +51,11 @@ input[type='range']::-ms-thumb {
   background: #ffffff;
   cursor: pointer;
 }
+
+.input-comment:focus + button > svg {
+  color: #157eff;
+}
+
+.input-comment:focus + button > svg:hover {
+  color: #005bca;
+}
