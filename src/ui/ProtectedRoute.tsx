@@ -21,6 +21,7 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
         setLoading(true);
         const currentUser = await getCurrentUser();
         if (!currentUser) return;
+
         const {
           account: { username, full_name, picture },
         } = currentUser;

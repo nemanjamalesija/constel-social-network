@@ -41,8 +41,8 @@ function Window({ children, name }: { children: ReactNode; name: string }) {
   return createPortal(
     <div>
       <Overlay />
-      <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-lg py-4 px-6  bg-figmaGray rounded-lg'>
-        <button className='absolute right-2 top-1' onClick={close}>
+      <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        <button className='absolute right-5 top-1' onClick={close}>
           <FontAwesomeIcon
             icon={faClose}
             className='h-6 w-6 text-figmaGrayShade2'

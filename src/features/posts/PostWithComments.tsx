@@ -6,6 +6,8 @@ import PostDate from './PostDate';
 import { useEffect, useState } from 'react';
 import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
+import WriteComment from './WriteComment';
+import Comments from './Comments';
 
 type PostWithCommentsType = {
   audio: string | null;
@@ -18,12 +20,15 @@ type PostWithCommentsType = {
 };
 
 const PostWithComments = () => {
-  const { post_id } = usePost();
+  const {
+    post_id,
+    user: { username, full_name, picture },
+  } = usePost();
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({} as PostWithCommentsType);
 
   useEffect(() => {
-    const getPost = async () => {
+    (async () => {
       try {
         setLoading(true);
         const postAPI = await getSinglePost(post_id);
@@ -34,23 +39,19 @@ const PostWithComments = () => {
           setLoading(false);
         }
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.log(error);
         setLoading(false);
       }
-    };
-
-    getPost();
+    })();
   }, []);
 
   if (loading) return <Spinner />;
 
-  console.log(post);
-
   return (
-    <article className=''>
-      <UserInfo />
+    <article className='shadow-lg py-4 px-6  bg-figmaGray rounded-lg max-w-2xl max-h-[700px] overflow-y-scroll'>
+      <UserInfo username={username} full_name={full_name} picture={picture} />
       {post.image && (
-        <figure className='flex my-3 max-h-[360px]'>
+        <figure className='flex my-3 max-h-[280px]'>
           <img
             src={post.image}
             alt='post image'
@@ -58,12 +59,14 @@ const PostWithComments = () => {
           />
         </figure>
       )}
-      <PostDate />
+      <PostDate created_at={post.created_at} />
       <p className='text-[15px] text-figmaBlack my-3'>{post.text}</p>
-      <div className='flex gap-2'>
+      <WriteComment />
+      <div className='flex gap-2 mb-4'>
         <LikeButton />
         <CommentButton type='dummy' />
       </div>
+      <Comments />
     </article>
   );
 };
