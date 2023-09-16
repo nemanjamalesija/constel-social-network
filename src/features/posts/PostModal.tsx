@@ -1,14 +1,13 @@
 import getSinglePost from '../../api/getSinglePost';
 import Spinner from '../../ui/Spinner';
-import { usePost } from '../posts/PostContext';
+import { usePost } from './PostContext';
 import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
 import { useEffect, useState } from 'react';
 import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
-import WriteComment from './WriteComment';
-import Comments from './Comments';
-import { setPosts } from '../posts/postsSlice';
+import WriteComment from '../comments/WriteComment';
+import Comments from '../comments/Comments';
 
 type PostWithCommentsType = {
   audio: string | null;

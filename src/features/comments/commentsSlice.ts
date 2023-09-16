@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { PostsType } from '../../types/postType';
 
 type CommentType = {
   comment_id: string;
@@ -26,10 +25,21 @@ const commentsSlice = createSlice({
     addNewComment(state, action) {
       state.comments.push(action.payload);
     },
+
+    removeComment(state, action) {
+      const id = action.payload;
+
+      const indexToUpdate = state.comments.findIndex((c) => c.comment_id == id);
+
+      if (indexToUpdate !== -1) {
+        // Remove the old object
+        state.comments.splice(indexToUpdate, 1);
+      }
+    },
   },
 });
 
 export const commentsReducer = commentsSlice.reducer;
-export const { setComments, addNewComment } = commentsSlice.actions;
+export const { setComments, addNewComment, removeComment } = commentsSlice.actions;
 
 export default commentsSlice.reducer;

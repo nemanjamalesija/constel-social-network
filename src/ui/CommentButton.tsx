@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 import Modal from './Modal';
-import PostComments from '../features/comments/PostWithComments';
+import PostComments from '../features/posts/PostModal';
 import { usePost } from '../features/posts/PostContext';
 
 const CommentButton = ({ type }: { type: string }) => {

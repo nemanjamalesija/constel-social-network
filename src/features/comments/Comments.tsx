@@ -3,23 +3,14 @@ import getAllComments from '../../api/getAllComments';
 import { usePost } from '../posts/PostContext';
 import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
-import { useAppSelector } from '../../hooks/useAppSelector';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { useGetUserData } from '../../hooks/useGetUserData';
 import Spinner from '../../ui/Spinner';
 import { useGetCommentsData } from '../../hooks/useGetCommentsData';
-import { setComments } from './commentsSlice';
+import { removeComment, setComments } from './commentsSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-
-type CommentType = {
-  comment_id: string;
-  created_at: string;
-  full_name: string;
-  picture: string;
-  text: string;
-  username: string;
-};
+import deleteComment from '../../api/deleteComment';
 
 const Comments = () => {
   const { post_id } = usePost();
@@ -41,12 +32,21 @@ const Comments = () => {
     })();
   }, []);
 
+  const deleteCommentHandler = async (postId: string, commentId: string) => {
+    await deleteComment(postId, commentId);
+    dispatch(removeComment(commentId));
+  };
+
   if (loading) return <Spinner />;
 
   return (
     <div>
       <h3 className='text-lg font-bold text-figmaBlack mb-3'>
-        {comments.length} comments
+        {comments.length === 0
+          ? 'No comments'
+          : comments.length === 1
+          ? '1 comment'
+          : `${comments.length} comments`}
       </h3>
       <div className='w-full flex flex-col gap-4'>
         {comments.map((c) => {
@@ -66,8 +66,15 @@ const Comments = () => {
                 />
                 <div className='flex items-center gap-3'>
                   <PostDate created_at={c.created_at} />
+
+                  {/* if post belongs to the current user allow delete */}
                   {c.username === username && (
-                    <button className='flex items-center gap-1 text-sm text-figmaRed capitalize'>
+                    <button
+                      className='flex items-center gap-1 text-sm text-figmaRed capitalize'
+                      onClick={() => {
+                        deleteCommentHandler(post_id, c.comment_id);
+                      }}
+                    >
                       <FontAwesomeIcon icon={faTrashCan} />
                       <span>delete</span>
                     </button>
