@@ -2,9 +2,9 @@ import AudioControls from './AudioControls';
 
 const RecordAudio = () => {
   return (
-    <button>
+    <div>
       <AudioControls type='record' />
-    </button>
+    </div>
   );
 };
 
