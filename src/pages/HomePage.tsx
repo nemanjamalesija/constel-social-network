@@ -7,6 +7,7 @@ import Spinner from '../ui/Spinner';
 import SinglePost from '../features/posts/SinglePost';
 import Sidebar from '../ui/Sidebar';
 import { PostProvider } from '../features/posts/PostContext';
+import { PostType } from '../types/postType';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ const HomePage = () => {
 
         if (postsAPI) {
           const { posts } = postsAPI;
-          dispatch(setPosts(posts));
+          dispatch(setPosts(posts as PostType));
           setLoading(false);
         }
       } catch (error) {

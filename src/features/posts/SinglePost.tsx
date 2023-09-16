@@ -1,42 +1,31 @@
-import { Post } from '../../types/postType';
-import PostHeader from './PostHeader';
-import LikeOrCommentButton from '../../ui/LikeOrCommentButton';
-import { useContext } from 'react';
 import { usePost } from './PostContext';
+import UserInfo from './UserInfo';
+import PostDate from './PostDate';
+import LikeButton from '../../ui/LikeButton';
+import CommentButton from '../../ui/CommentButton';
 
 const SinglePost = () => {
-  const postProps = usePost();
-  const {
-    audio,
-    comments,
-    created_at,
-    image,
-    liked,
-    likes,
-    post_id,
-    text,
-    user,
-    user_id,
-  } = postProps;
-
-  console.log(liked + 'from single post ');
+  const { image, text, user } = usePost();
 
   return (
     <article className='bg-figmaGray py-4 px-6 rounded-lg'>
-      <PostHeader />
+      <div className='flex justify-between items-center mb-3'>
+        <UserInfo />
+        <PostDate />
+      </div>
       {image && (
-        <figure className='flex mb-3'>
+        <figure className='flex mb-3 max-h-[360px]'>
           <img
             src={image}
             alt={`${user.full_name}'s post image`}
-            className='rounded-lg mx-auto'
+            className='rounded-lg mx-auto object-cover'
           />
         </figure>
       )}
       <p className='text-[15px] text-figmaBlack mb-3'>{text}</p>
       <div className='flex gap-2'>
-        <LikeOrCommentButton type='likes' likes={likes} />
-        <LikeOrCommentButton type='comments' />
+        <LikeButton />
+        <CommentButton type='modal' />
       </div>
     </article>
   );

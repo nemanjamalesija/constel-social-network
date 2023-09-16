@@ -3,29 +3,16 @@ import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons/faHea
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons/faHeart';
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 import Modal from './Modal';
-import PostComments from '../features/posts/PostComments';
+import PostComments from '../features/posts/PostWithComments';
 import { usePost } from '../features/posts/PostContext';
 
-const LikeOrCommentButton = ({ type }: { type: string }) => {
-  const postProps = usePost();
-  const { comments, liked, likes } = postProps;
+const CommentButton = ({ type }: { type: string }) => {
+  const { comments } = usePost();
 
   const className =
-    'py-1 px-6 bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white rounded-lg transition-all duration-300 flex items-center gap-2';
+    'py-1 px-6 bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white rounded-lg transition-all duration-200 flex items-center gap-2';
 
-  if (type == 'likes')
-    return (
-      <button
-        className={`${className} ${
-          liked ? 'bg-blue-500 hover:bg-blue-700 text-white' : ''
-        }`}
-      >
-        <FontAwesomeIcon icon={liked ? faSolidHeart : faRegularHeart} />
-        <span>{likes}</span>
-      </button>
-    );
-
-  if (type == 'comments')
+  if (type == 'modal')
     return (
       <Modal>
         <Modal.Open opens='post-comments'>
@@ -39,6 +26,14 @@ const LikeOrCommentButton = ({ type }: { type: string }) => {
         </Modal.Window>
       </Modal>
     );
+
+  if (type == 'dummy')
+    return (
+      <button className={className}>
+        <FontAwesomeIcon icon={faComment} />
+        <span>{comments}</span>
+      </button>
+    );
 };
 
-export default LikeOrCommentButton;
+export default CommentButton;

@@ -1,14 +1,14 @@
 import { createContext, useContext, ReactNode } from 'react';
-import { Post } from '../../types/postType';
+import { PostType } from '../../types/postType';
 
-const PostContext = createContext({} as Post);
+const PostContext = createContext({} as PostType);
 
 export function PostProvider({
   children,
   postProps, // Receive the postProps from the parent component
 }: {
   children: ReactNode;
-  postProps: Post;
+  postProps: PostType;
 }) {
   return (
     <PostContext.Provider value={postProps}>{children}</PostContext.Provider>

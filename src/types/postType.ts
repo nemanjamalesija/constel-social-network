@@ -1,4 +1,4 @@
-export type Post = {
+export type PostType = {
   post_id: string;
   user_id: string;
   text: string;
@@ -15,4 +15,4 @@ export type Post = {
   liked: boolean;
 };
 
-export type PostsType = Post[];
+export type PostsType = PostType[];

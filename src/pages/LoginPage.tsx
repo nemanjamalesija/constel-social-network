@@ -18,8 +18,8 @@ const LoginPage = () => {
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
   const navigate = useNavigate();
 
-  // comment out line below to see when input error handling (invalid email or password). This returns a boolean which controls disabled prop on the log in button, preventing user to submit inputs if they are not valid.
-  // !!! Don't forget to remove the prop from the button as well !!!
+  // this line returns boollean and controls the disabled prop on the log in button (<LogInButton />). Remove the disabled prop to see input error handling
+
   const allFieldsCompleted = loginValidator.safeParse({
     email,
     password,
@@ -62,6 +62,10 @@ const LoginPage = () => {
           message: 'Oops, something went wrong',
         });
       }
+    } finally {
+      setTimeout(() => {
+        setError({ type: '', message: '' });
+      }, 3000);
     }
   };
 
@@ -81,6 +85,7 @@ const LoginPage = () => {
             <FormLabel forProp='Email' />
             <FormInput
               id='Email'
+              type='email'
               placeholder='Enter your email here...'
               errorType={error.type == 'email' ? error.type : null}
               value={email}
@@ -94,6 +99,7 @@ const LoginPage = () => {
             <FormLabel forProp='Password' />
             <FormInput
               id='Password'
+              type='password'
               placeholder='Enter your password here...'
               errorType={error.type == 'password' ? error.type : null}
               value={password}
