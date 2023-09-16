@@ -37,7 +37,7 @@ const SinglePost = (props: SinglePostProps) => {
       )}
       <p className='text-[15px] text-figmaBlack mb-3'>{text}</p>
       <div className='flex gap-2'>
-        <LikeOrCommentButton type='likes' likes={likes} />
+        <LikeOrCommentButton type='likes' likes={likes} liked={liked} />
         <LikeOrCommentButton type='comments' comments={comments} />
       </div>
     </article>

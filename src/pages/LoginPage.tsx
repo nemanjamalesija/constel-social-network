@@ -18,7 +18,8 @@ const LoginPage = () => {
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
   const navigate = useNavigate();
 
-  // comment out line below to see when input error handling (invalid email or password). This returns a boolean which controls disabled prop on the log in button, preventing user to submit inputs if they are not valid
+  // comment out line below to see when input error handling (invalid email or password). This returns a boolean which controls disabled prop on the log in button, preventing user to submit inputs if they are not valid.
+  // !!! Don't forget to remove the prop from the button as well !!!
   const allFieldsCompleted = loginValidator.safeParse({
     email,
     password,
