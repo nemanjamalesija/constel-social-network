@@ -11,8 +11,13 @@ const LikeButton = () => {
   const { likes, liked, post_id } = usePost();
   const dispatch = useAppDispatch();
 
-  const className =
-    'py-1 px-6 bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white rounded-lg transition-all duration-200 flex items-center gap-2';
+  const baseStyle =
+    'py-1 px-6 rounded-lg transition-all duration-200 flex items-center gap-2';
+
+  const colorsDefault =
+    'bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white';
+
+  const colorsLiked = 'bg-figmaBlue hover:bg-figmaBlueShade text-white';
 
   const postsLikesHandler = async () => {
     liked
@@ -22,9 +27,7 @@ const LikeButton = () => {
 
   return (
     <button
-      className={`${className} ${
-        liked ? 'bg-blue-500 hover:bg-blue-700 text-white' : ''
-      }`}
+      className={`${baseStyle} ${liked ? colorsLiked : colorsDefault}`}
       onClick={postsLikesHandler}
     >
       <FontAwesomeIcon icon={liked ? faSolidHeart : faRegularHeart} />
