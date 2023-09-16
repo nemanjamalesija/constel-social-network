@@ -1,7 +1,7 @@
 import { loginValidator } from '../features/login/InputValidation';
 import { useEffect, useState } from 'react';
 import { ZodError } from 'zod';
-import Logo from '../utils/logo';
+import Logo from '../ui/logo';
 import FormLabel from '../features/login/FormLabel';
 import formatZodError from '../helpers/formatZodError';
 import LogInButton from '../features/login/LogInButton';
@@ -17,6 +17,12 @@ const LoginPage = () => {
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
   const navigate = useNavigate();
+
+  // comment out line below to see when input error handling (invalid email or password). This returns a boolean which controls disabled prop on the log in button, preventing user to submit inputs if they are not valid
+  const allFieldsCompleted = loginValidator.safeParse({
+    email,
+    password,
+  }).success;
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -61,8 +67,8 @@ const LoginPage = () => {
   return (
     <section id='login' className='relative'>
       <div className='max-w-sm absolute left-1/2 -translate-x-1/2 translate-y-[30%] '>
-        <div className=''>
-          <Logo />
+        <div className='flex items-center'>
+          <Logo width='386' height='94' viewBox='0 0 36 36' />
         </div>
         <form
           onSubmit={(e) => {
@@ -100,7 +106,7 @@ const LoginPage = () => {
             <ErrorMessage type={error.type} message={error.message} />
           )}
           <div className='text-center'>
-            <LogInButton />
+            <LogInButton disabled={!allFieldsCompleted} />
           </div>
         </form>
       </div>

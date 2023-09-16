@@ -5,7 +5,7 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import { useEffect, useState } from 'react';
 import Spinner from '../ui/Spinner';
 import SinglePost from '../features/posts/SinglePost';
-import Sidebar from '../features/posts/Sidebar';
+import Sidebar from '../ui/Sidebar';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -37,13 +37,18 @@ const HomePage = () => {
   console.log(posts);
 
   return (
-    <div className='grid grid-cols-[150px,1fr,150px] max-w-7xl '>
+    <div className='grid grid-cols-[300px,1fr,300px] max-w-[1366px] mx-auto'>
       <Sidebar />
-      <section className='border-l border-r border-neutral-100 px-4 py-2 flex flex-col gap-6'>
-        <h2 className='text-figmaBlack text-sm lg:text-base'>Home</h2>
-        {posts.map((p) => (
-          <SinglePost key={p.post_id} {...p} />
-        ))}
+      <section>
+        <h1 className='text-figmaBlack lg:text-lg  font-bold  border-b border-l border-r border-figmaGrayLight pt-5 pb-2 px-6'>
+          Home
+        </h1>
+
+        <div className='border-l border-r border-figmaGrayLight p-6 flex flex-col gap-6'>
+          {posts.map((p) => (
+            <SinglePost key={p.post_id} {...p} />
+          ))}
+        </div>
       </section>
     </div>
   );
