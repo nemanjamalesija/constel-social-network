@@ -1,10 +1,11 @@
 import { Post } from '../../types/postType';
 import PostHeader from './PostHeader';
 import LikeOrCommentButton from '../../ui/LikeOrCommentButton';
+import { useContext } from 'react';
+import { usePost } from './PostContext';
 
-type SinglePostProps = Post;
-
-const SinglePost = (props: SinglePostProps) => {
+const SinglePost = () => {
+  const postProps = usePost();
   const {
     audio,
     comments,
@@ -16,16 +17,13 @@ const SinglePost = (props: SinglePostProps) => {
     text,
     user,
     user_id,
-  } = props;
+  } = postProps;
+
+  console.log(liked + 'from single post ');
 
   return (
     <article className='bg-figmaGray py-4 px-6 rounded-lg'>
-      <PostHeader
-        picture={user.picture}
-        full_name={user.full_name}
-        username={user.username}
-        created_at={created_at}
-      />
+      <PostHeader />
       {image && (
         <figure className='flex mb-3'>
           <img
@@ -37,8 +35,8 @@ const SinglePost = (props: SinglePostProps) => {
       )}
       <p className='text-[15px] text-figmaBlack mb-3'>{text}</p>
       <div className='flex gap-2'>
-        <LikeOrCommentButton type='likes' likes={likes} liked={liked} />
-        <LikeOrCommentButton type='comments' comments={comments} />
+        <LikeOrCommentButton type='likes' likes={likes} />
+        <LikeOrCommentButton type='comments' />
       </div>
     </article>
   );

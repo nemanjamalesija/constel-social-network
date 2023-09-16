@@ -1,20 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import formatDate from '../../helpers/formatDate';
+import { usePost } from './PostContext';
 
-type PostHeaderProps = {
-  picture: string;
-  full_name: string;
-  username: string;
-  created_at: string;
-};
+const PostHeader = ({}) => {
+  const {
+    created_at,
+    user: { full_name, username, picture },
+  } = usePost();
 
-const PostHeader = ({
-  picture,
-  full_name,
-  username,
-  created_at,
-}: PostHeaderProps) => {
   return (
     <div className='flex justify-between items-center mb-3'>
       <div className='flex gap-3 items-center'>

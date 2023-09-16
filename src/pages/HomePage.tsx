@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Spinner from '../ui/Spinner';
 import SinglePost from '../features/posts/SinglePost';
 import Sidebar from '../ui/Sidebar';
+import { PostProvider } from '../features/posts/PostContext';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -34,8 +35,6 @@ const HomePage = () => {
 
   if (loading) return <Spinner />;
 
-  console.log(posts);
-
   return (
     <div className='grid grid-cols-[300px,1fr,300px] max-w-[1366px] mx-auto'>
       <Sidebar />
@@ -46,7 +45,9 @@ const HomePage = () => {
 
         <div className='border-l border-r border-figmaGrayLight p-6 flex flex-col gap-6'>
           {posts.map((p) => (
-            <SinglePost key={p.post_id} {...p} />
+            <PostProvider key={p.post_id} postProps={p}>
+              <SinglePost />
+            </PostProvider>
           ))}
         </div>
       </section>

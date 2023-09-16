@@ -4,20 +4,12 @@ import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons/f
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 import Modal from './Modal';
 import PostComments from '../features/posts/PostComments';
+import { usePost } from '../features/posts/PostContext';
 
-type LikeOrCommentButtonProps = {
-  type: string;
-  likes?: number;
-  liked?: boolean;
-  comments?: number;
-};
+const LikeOrCommentButton = ({ type }: { type: string }) => {
+  const postProps = usePost();
+  const { comments, liked, likes } = postProps;
 
-const LikeOrCommentButton = ({
-  type,
-  likes,
-  liked,
-  comments,
-}: LikeOrCommentButtonProps) => {
   const className =
     'py-1 px-6 bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white rounded-lg transition-all duration-300 flex items-center gap-2';
 
@@ -25,7 +17,7 @@ const LikeOrCommentButton = ({
     return (
       <button
         className={`${className} ${
-          liked ? 'bg-[#157EFF] hover:bg-[#005BCA] text-white' : ''
+          liked ? 'bg-blue-500 hover:bg-blue-700 text-white' : ''
         }`}
       >
         <FontAwesomeIcon icon={liked ? faSolidHeart : faRegularHeart} />
