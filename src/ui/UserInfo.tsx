@@ -28,11 +28,11 @@ const UserInfo = ({
         />
       </figure>
       <div className='flex flex-col'>
-        <span className={`text-figmaGrayShade text-base ${usernameClassname}`}>
+        <span className={`text-figmaGrayShade text-sm ${usernameClassname}`}>
           @{username}
         </span>
         <h3
-          className={`text-figmaBlack text-lg font-medium ${fullNameClassname}`}
+          className={`text-figmaBlack text-base font-medium ${fullNameClassname}`}
         >
           {full_name}
         </h3>

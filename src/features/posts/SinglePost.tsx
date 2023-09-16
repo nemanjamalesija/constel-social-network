@@ -3,9 +3,11 @@ import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
 import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
+import AudioPlayer from '../AudioPlayer/AudioPlayer';
 
 const SinglePost = () => {
   const {
+    audio,
     image,
     text,
     created_at,
@@ -27,7 +29,12 @@ const SinglePost = () => {
           />
         </figure>
       )}
-      <p className='text-[15px] text-figmaBlack mb-3'>{text}</p>
+      <p className='text-[15px] leading-[1.45rem] text-figmaBlack mb-3'>
+        {text}
+      </p>
+
+      {audio && <AudioPlayer audioSrc={audio} />}
+
       <div className='flex gap-2'>
         <LikeButton />
         <CommentButton type='modal' />

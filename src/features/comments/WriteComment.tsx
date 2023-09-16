@@ -22,7 +22,6 @@ const WriteComment = ({ id }: { id: string }) => {
   // (missing comment_id from the backend response)
   useEffect(() => {
     const refetchComments = async () => {
-      // Mark this function as async
       setLoading(true);
 
       const commentsAPI = await getAllComments(post_id);
@@ -46,6 +45,7 @@ const WriteComment = ({ id }: { id: string }) => {
 
         await createComment(id, commentText);
         setTriggerRefetch(!triggerRefetch);
+
         // this updates the UI without refetching,
         // but will cause a bug if trying to submit DELETE request before refreshing the page
 
@@ -72,7 +72,7 @@ const WriteComment = ({ id }: { id: string }) => {
       <button type='submit' className='-ml-4'>
         <FontAwesomeIcon
           icon={faPaperPlane}
-          className='text-figmaGrayShade text-xl'
+          className='text-figmaGrayShade hover:text-figmaGrayShade2 transition-all duration-200 text-xl'
         />
       </button>
     </form>
