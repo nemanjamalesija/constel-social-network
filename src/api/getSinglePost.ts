@@ -12,6 +12,14 @@ export default async function getSinglePost(id: string) {
       Authorization: 'Bearer ' + jwt,
     },
   });
+
+  if (response.status === 400) {
+    const { error } = await response.json();
+
+    alert(error.message);
+    return;
+  }
+
   const { post } = await response.json();
 
   return { post };

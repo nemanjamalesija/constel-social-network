@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
 import { faHeart as faRegularHeart } from '@fortawesome/free-regular-svg-icons/faHeart';
-import { usePost } from '../features/posts/PostContext';
-import likePost from '../api/likePost';
-import { useAppDispatch } from '../hooks/useAppDispatch';
-import { postLike, postUnlike } from '../features/posts/postsSlice';
-import unlikePost from '../api/unlikePost';
+import { usePost } from '../posts/PostContext';
+import likePost from '../../api/likePost';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { postLike, postUnlike } from '../posts/postsSlice';
+import unlikePost from '../../api/unlikePost';
 
 const LikeButton = () => {
   const { likes, liked, post_id } = usePost();

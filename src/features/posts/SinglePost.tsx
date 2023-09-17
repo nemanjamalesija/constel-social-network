@@ -1,8 +1,8 @@
 import { usePost } from './PostContext';
 import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
-import LikeButton from '../../ui/LikeButton';
-import CommentButton from '../../ui/CommentButton';
+import LikeButton from '../post/LikeButton';
+import CommentButton from '../post/CommentButton';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import { memo } from 'react';
 import PostImage from '../../ui/PostImage';
@@ -24,7 +24,7 @@ const SinglePost = memo(() => {
       </div>
 
       {image && (
-        <PostImage src={image} alt={full_name} imgClassname='max-h-[360px]' />
+        <PostImage src={image} alt={full_name} containerSize='max-h-[360px]' />
       )}
 
       <p className='text-[15px] leading-[1.45rem] text-figmaBlack mb-3'>

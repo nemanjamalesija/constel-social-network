@@ -14,9 +14,14 @@ export default async function deleteComment(postId: string, commentId: string) {
       }
     );
 
-    const { status, error } = await response.json();
+    if (response.status == 400) {
+      const { error } = await response.json();
 
-    if (status == 'error') return alert(error.message);
+      alert(error.message);
+      return;
+    }
+
+    await response.json();
   } catch (error) {
     console.log(error);
   }

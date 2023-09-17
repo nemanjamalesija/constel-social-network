@@ -11,6 +11,13 @@ export default async function unlikePost(id: string) {
       },
     });
 
+    if (response.status === 400) {
+      const { error } = await response.json();
+
+      alert(error.message);
+      return;
+    }
+
     await response.json();
   } catch (error) {
     console.log(error);

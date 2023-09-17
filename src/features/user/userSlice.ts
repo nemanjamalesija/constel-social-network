@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { UserAccountType } from '../../types/UserType';
 
-const initialState = {
-  username: '',
-  full_name: '',
-  picture: '',
-  status: 'idle',
-  error: '',
-};
+const initialState = {} as UserAccountType;
 
 const userSlice = createSlice({
   name: 'user',

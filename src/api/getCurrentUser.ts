@@ -13,7 +13,14 @@ export default async function getCurrentUser() {
     },
   });
 
+  if (response.status === 400) {
+    const { error } = await response.json();
+
+    alert(error.message);
+    return;
+  }
+
   const { account } = await response.json();
 
-  return { account };
+  return account;
 }

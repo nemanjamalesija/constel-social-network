@@ -1,11 +1,11 @@
 import getSinglePost from '../../api/getSinglePost';
 import Spinner from '../../ui/Spinner';
-import { usePost } from './PostContext';
+import { usePost } from '../posts/PostContext';
 import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
 import { useEffect, useState } from 'react';
-import LikeButton from '../../ui/LikeButton';
-import CommentButton from '../../ui/CommentButton';
+import LikeButton from './LikeButton';
+import CommentButton from './CommentButton';
 import WriteComment from '../comments/WriteComment';
 import AllComments from '../comments/AllComments';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
@@ -61,7 +61,7 @@ const PostWithComments = () => {
         <PostImage
           src={post.image}
           alt="post's user image"
-          imgClassname='max-h-[280px]'
+          containerSize='max-h-[280px]'
         />
       )}
       <PostDate created_at={post.created_at} />

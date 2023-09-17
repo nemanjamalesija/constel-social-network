@@ -5,6 +5,7 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import Spinner from './Spinner';
 import { useNavigate } from 'react-router';
 import getCurrentUser from '../api/getCurrentUser';
+import { UserAccountType } from '../types/UserType';
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const full_name = useAppSelector((state) => state.userReducer.full_name);
@@ -19,14 +20,11 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
 
       try {
         setLoading(true);
-        const currentUser = await getCurrentUser();
-        if (!currentUser) return;
+        const account = await getCurrentUser();
 
-        const {
-          account: { username, full_name, picture },
-        } = currentUser;
+        const { username, full_name, picture } = account;
+        dispatch(setUser({ username, full_name, picture } as UserAccountType));
 
-        dispatch(setUser({ username, full_name, picture }));
         setLoading(false);
       } catch (error) {
         console.error('Error fetching posts:', error);

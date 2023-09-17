@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useGetPostsData } from '../../hooks/useGetPostsData';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import getCurrentPosts from '../../api/getCurrentPosts';
+import getPostsFeed from '../../api/getPostsFeed';
 import { setPosts } from './postsSlice';
 import { PostsType } from '../../types/postType';
 import Spinner from '../../ui/Spinner';
@@ -17,7 +17,7 @@ const PostsParent = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const postsAPI = await getCurrentPosts();
+        const postsAPI = await getPostsFeed();
 
         if (postsAPI) {
           const { posts } = postsAPI;

@@ -1,13 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-type CommentType = {
-  comment_id: string;
-  created_at: string;
-  full_name: string;
-  picture: string;
-  text: string;
-  username: string;
-};
+import { CommentType } from '../../types/CommentType';
 
 const initialState = {
   comments: [] as CommentType[],
@@ -18,7 +10,6 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {
     setComments(state, action) {
-      console.log(action.payload);
       state.comments = action.payload;
     },
 
@@ -40,6 +31,7 @@ const commentsSlice = createSlice({
 });
 
 export const commentsReducer = commentsSlice.reducer;
-export const { setComments, addNewComment, removeComment } = commentsSlice.actions;
+export const { setComments, addNewComment, removeComment } =
+  commentsSlice.actions;
 
 export default commentsSlice.reducer;

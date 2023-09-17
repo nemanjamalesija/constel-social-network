@@ -1,3 +1,4 @@
+import { CommentType } from '../types/CommentType';
 import { baseUrl } from '../utils/baseUrl';
 
 export default async function createComment(id: string, text: string) {
@@ -16,9 +17,16 @@ export default async function createComment(id: string, text: string) {
       }),
     });
 
-    const { status, error } = await response.json();
+    if (response.status === 400) {
+      const { error } = await response.json();
 
-    if (status == 'error') return alert(error.message);
+      alert(error.message);
+      return;
+    }
+
+    const { comment } = await response.json();
+
+    return comment;
   } catch (error) {
     console.log(error);
   }

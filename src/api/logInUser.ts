@@ -12,11 +12,18 @@ export default async function logInUser(email: string, password: string) {
     }),
   });
 
-  const { status, error, token } = await response.json();
+  try {
+    if (response.status === 400) {
+      const { error } = await response.json();
 
-  if (error) return { status, error };
-  else {
-    localStorage.setItem('jwt', token);
-    return { status };
+      alert(error.message);
+      return;
+    }
+
+    const { token } = await response.json();
+
+    return { token };
+  } catch (error) {
+    console.log(error);
   }
 }
