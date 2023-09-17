@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react';
 import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
 import WriteComment from '../comments/WriteComment';
-import Comments from '../comments/Comments';
+import AllComments from '../comments/AllComments';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
+import PostImage from '../../ui/PostImage';
 
 type PostWithCommentsType = {
   audio: string | null;
@@ -57,13 +58,11 @@ const PostWithComments = () => {
         fullNameClassname={post.image ? '' : 'mb-3'}
       />
       {post.image && (
-        <figure className='flex my-3 max-h-[280px]'>
-          <img
-            src={post.image}
-            alt='post image'
-            className='rounded-lg mx-auto object-cover'
-          />
-        </figure>
+        <PostImage
+          src={post.image}
+          alt="post's user image"
+          imgClassname='max-h-[280px]'
+        />
       )}
       <PostDate created_at={post.created_at} />
       <p className='text-[15px] leading-[1.45rem] text-figmaBlack my-3'>
@@ -72,12 +71,12 @@ const PostWithComments = () => {
 
       {post.audio && <AudioPlayer audioSrc={post.audio} />}
 
-      <WriteComment id={post.post_id} />
+      <WriteComment post_id={post_id} />
       <div className='flex gap-2 mb-4'>
         <LikeButton />
         <CommentButton type='dummy' />
       </div>
-      <Comments />
+      <AllComments />
     </article>
   );
 };

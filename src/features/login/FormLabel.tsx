@@ -1,5 +1,3 @@
-import React from 'react';
-
 const FormLabel = ({ forProp }: { forProp: string }) => {
   return (
     <label

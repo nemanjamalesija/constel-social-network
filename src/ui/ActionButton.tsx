@@ -6,7 +6,8 @@ type ActionButtonProps = {
   children: ReactNode;
 };
 
-// I've set disabled as optional undefined to avoid throwing an error if you decide to disable it in the parent
+// I've set disabled as optional undefined to avoid throwing an
+// error if you decide to disable it in the parent
 const ActionButton = ({ disabled, className, children }: ActionButtonProps) => {
   return (
     <button

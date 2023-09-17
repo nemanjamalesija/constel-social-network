@@ -12,11 +12,7 @@ const WritePost = () => {
   return (
     <section className='bg-figmaGray py-4 px-6 rounded-lg'>
       <div className='flex gap-5'>
-        <UserImage
-          picture={picture}
-          full_name={full_name}
-          imgClassname='h-14 w-14'
-        />
+        <UserImage src={picture} alt={full_name} imgClassname='h-14 w-14' />
         <form action='' className='w-full'>
           <input
             type='text'

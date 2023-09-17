@@ -1,17 +1,17 @@
 import React from 'react';
 
 type UserImageProp = {
-  picture: string;
-  full_name: string;
+  src: string;
+  alt: string;
   imgClassname?: string;
 };
 
-const UserImage = ({ picture, full_name, imgClassname }: UserImageProp) => {
+const UserImage = ({ src, alt, imgClassname }: UserImageProp) => {
   return (
     <figure>
       <img
-        src={picture}
-        alt={`${full_name} image`}
+        src={src}
+        alt={`${alt} image`}
         className={`h-10 w-10 rounded-full object-cover ${imgClassname}`}
       />
     </figure>

@@ -8,15 +8,14 @@ import { addNewComment, setComments } from './commentsSlice';
 import getAllComments from '../../api/getAllComments';
 import { usePost } from '../posts/PostContext';
 import Spinner from '../../ui/Spinner';
+import { memo } from 'react';
 
-const WriteComment = ({ id }: { id: string }) => {
+const WriteComment = memo(({ post_id }: { post_id: string }) => {
   const dispatch = useAppDispatch();
   // const { full_name, username, picture } = useGetUserData();
   const [commentText, setCommentText] = useState('');
   const [loading, setLoading] = useState(false);
   const [triggerRefetch, setTriggerRefetch] = useState(false);
-
-  const { post_id } = usePost();
 
   // refetch nescessary in order to update ui
   // (missing comment_id from the backend response)
@@ -43,7 +42,7 @@ const WriteComment = ({ id }: { id: string }) => {
       onSubmit={async (e) => {
         e.preventDefault();
 
-        await createComment(id, commentText);
+        await createComment(post_id, commentText);
         setTriggerRefetch(!triggerRefetch);
 
         // this updates the UI without refetching,
@@ -77,6 +76,6 @@ const WriteComment = ({ id }: { id: string }) => {
       </button>
     </form>
   );
-};
+});
 
 export default WriteComment;

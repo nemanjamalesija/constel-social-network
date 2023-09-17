@@ -5,6 +5,7 @@ import LikeButton from '../../ui/LikeButton';
 import CommentButton from '../../ui/CommentButton';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import { memo } from 'react';
+import PostImage from '../../ui/PostImage';
 
 const SinglePost = memo(() => {
   const {
@@ -21,15 +22,11 @@ const SinglePost = memo(() => {
         <UserInfo username={username} full_name={full_name} picture={picture} />
         <PostDate created_at={created_at} />
       </div>
+
       {image && (
-        <figure className='flex mb-3 max-h-[360px]'>
-          <img
-            src={image}
-            alt={`${full_name}'s post image`}
-            className='rounded-lg mx-auto object-cover'
-          />
-        </figure>
+        <PostImage src={image} alt={full_name} imgClassname='max-h-[360px]' />
       )}
+
       <p className='text-[15px] leading-[1.45rem] text-figmaBlack mb-3'>
         {text}
       </p>
