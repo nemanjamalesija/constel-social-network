@@ -34,65 +34,68 @@ const WritePost = () => {
 
   return (
     <section className='py-4 px-6 bg-figmaGray 6 rounded-lg relative'>
-      <div className='md:grid grid-cols-[80px,1fr]'>
-        <UserImage src={picture} alt={full_name} imgClassname='h-14 w-14 ' />
-        <form
-          className='w-full'
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitHandler(postText);
-          }}
-        >
+      <form
+        className='w-full '
+        onSubmit={(e) => {
+          e.preventDefault();
+          submitHandler(postText);
+        }}
+      >
+        <div className='smb:flex smb:items-center smb:gap-4 smb:mb-3 md:grid grid-cols-[72px,1fr] md:mb-3'>
+          <UserImage src={picture} alt={full_name} imgClassname='h-14 w-14' />
           <input
             type='text'
-            className='input-comment py-2 w-full border-b border-figmaGrayShade  placeholder:text-figmaGrayShade bg-figmaGray outline-none focus:border-figmaBlue transition-all duration-200 mb-4'
+            className='input-comment py-2 w-full border-b border-figmaGrayShade  placeholder:text-figmaGrayShade bg-figmaGray outline-none focus:border-figmaBlue transition-all duration-200'
             placeholder="What's happening"
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
           />
-          <div className='md:grid md:grid-cols-[50px,1fr,160px]'>
-            <AudioRecorder
-              setAudioFile={setAudioFile}
-              audioSrc={audioSrc}
-              setAudioSrc={setAudioSrc}
-              setIsRecording={setIsRecording}
-              isRecording={isRecording}
-              isRecordButtonVisible={isRecordButtonVisible}
-              setIsRecordButtonVisible={setIsRecordButtonVisible}
-            />
+        </div>
+        <div className='md:grid md:grid-cols-[50px,1fr,160px] '>
+          <AudioRecorder
+            setAudioFile={setAudioFile}
+            audioSrc={audioSrc}
+            setAudioSrc={setAudioSrc}
+            setIsRecording={setIsRecording}
+            isRecording={isRecording}
+            isRecordButtonVisible={isRecordButtonVisible}
+            setIsRecordButtonVisible={setIsRecordButtonVisible}
+          />
 
-            {/* // delete and submit button 
+          {/* // delete and submit button 
             move around conditinally depending on recording status */}
-            <button
-              type='button'
-              className={`${
-                audioFile
-                  ? 'mr-4 transition-all duration-200 flex items-center col-start-2 justify-end '
-                  : 'hidden'
-              }`}
-              onClick={() => {
-                setAudioFile(null);
-                setAudioSrc('');
-                setIsRecordButtonVisible(true);
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faTrashCan}
-                className='h-6 w-6 text-figmaRed hover:text-figmaRedShade'
-              />
-            </button>
-            <div
-              className={`${
-                isRecording
-                  ? 'row-start-2 col-start-3 flex justify-end'
-                  : 'w-full md:col-start-3 smb:block md:flex md:justify-end'
-              }`}
-            >
-              <ActionButton screen='small' />
-            </div>
+          <button
+            type='button'
+            className={`${
+              audioFile
+                ? 'flex items-center smb:mb-3 smb:text-figmaRed smb:text-base smb:font-medium smb:justify-center smb:w-full md:justify-end md:col-start-2  md:mr-4 transition-all duration-200 '
+                : 'hidden'
+            }`}
+            onClick={() => {
+              setAudioFile(null);
+              setAudioSrc('');
+              setIsRecordButtonVisible(true);
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faTrashCan}
+              className='h-6 w-6 text-figmaRed hover:text-figmaRedShade smb:hidden'
+            />
+            <span className='text-base w-full flex items-center justify-center md:hidden'>
+              Delete audio
+            </span>
+          </button>
+          <div
+            className={`${
+              isRecording
+                ? 'row-start-2 col-start-3 flex justify-end'
+                : 'w-full md:col-start-3 smb:block md:flex md:justify-end'
+            }`}
+          >
+            <ActionButton screen='small' />
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </section>
   );
 };

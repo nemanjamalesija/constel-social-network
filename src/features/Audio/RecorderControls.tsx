@@ -21,12 +21,13 @@ const RecorderControls = ({
         type='button'
         onClick={handleStartRecording}
         aria-label='Play'
-        className='smb:w-full smb:bg-figmaBlue smb:rounded-lg smb:mb-2 smb:px-3 smb:py-2 sm:py-1 flex flex-col items-start self-center smb:relative smb:z-50'
+        className='sma:py-3 sm:py-1 sm:text-base sma:px-[3.2rem]  smb:w-full smb:py-3  smb:bg-figmaBlue smb:hover:bg-figmaBlueShade smb:rounded-lg smb:mb-2 smb:px-3  smb:justify-start smb:items-center md:py-3 md:flex-col md:items-start md:self-center smb:relative smb:md:w-full smb:z-50 md:col-start-2 md:ml-7 flex transition-all duration-200 '
       >
         <FontAwesomeIcon
           icon={faMicrophone}
-          className='text-figmaBlue hover:text-figmaBlueShade h-7 w-7 smb:text-white smb:hover:text-figmaGray'
+          className='text-figmaBlue hover:text-figmaBlueShade h-7 w-7 smb:text-white smb:hover:text-figmaGray sm:self-start smb:absolute'
         />
+        <span className='md:hidden text-white flex-1'>Record audio</span>
       </button>
     )
   );
