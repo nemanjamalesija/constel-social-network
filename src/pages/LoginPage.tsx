@@ -65,7 +65,6 @@ const LoginPage = () => {
     } finally {
       setTimeout(() => {
         setError({ type: '', message: '' });
-        setPassword('');
       }, 3000);
     }
   };
