@@ -21,6 +21,8 @@ const PostsParent = () => {
 
         if (postsAPI) {
           const { posts } = postsAPI;
+          console.log(posts);
+
           dispatch(setPosts(posts as PostsType));
           setLoading(false);
         }
@@ -36,7 +38,7 @@ const PostsParent = () => {
   if (loading) return <Spinner />;
 
   return (
-    <section>
+    <section className='flex flex-col gap-6'>
       {posts.map((p) => (
         <PostProvider key={p.post_id} postProps={p}>
           <SinglePost />

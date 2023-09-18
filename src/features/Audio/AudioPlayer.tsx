@@ -1,15 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import AudioControls from './AudioControls';
 
-const AudioPlayer = ({ audioSrc }: { audioSrc: any }) => {
+type AudioPlayerPropsType = {
+  audioSrc: string;
+  recording: boolean;
+  handleStartRecording: () => void;
+  handleStopRecording: () => void;
+};
+
+const AudioPlayer = ({
+  audioSrc,
+  recording,
+
+  handleStopRecording,
+}: AudioPlayerPropsType) => {
   const [audio] = useState(new Audio(audioSrc));
   const [playing, setPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  useEffect(() => {
-    playing ? audio.play() : audio.pause();
-  }, [playing]);
 
   useEffect(() => {
     audio.addEventListener('ended', () => setPlaying(false));
@@ -37,6 +44,7 @@ const AudioPlayer = ({ audioSrc }: { audioSrc: any }) => {
     const interval = setInterval(() => {
       if (audio.ended) {
         clearInterval(interval); // Clear the interval when audio ends
+        setTrackProgress(0);
       } else {
         setTrackProgress(audio.currentTime);
       }
@@ -58,41 +66,29 @@ const AudioPlayer = ({ audioSrc }: { audioSrc: any }) => {
     return minutes + ':' + secs;
   }
 
-  const onScrub = (value: any) => {
-    audio.currentTime = value;
-    setTrackProgress(audio.currentTime);
-  };
-
-  const onScrubEnd = () => {
-    // If not already playing, start
-    if (!isPlaying) {
-      setIsPlaying(true);
-    }
-    startTimer();
-  };
-
   return (
-    <div className='p-6 bg-figmaGrayPlayer rounded-lg mb-3 overflow-hidden'>
+    <div className='py-6 px-4 bg-figmaGrayPlayer rounded-lg mb-3 overflow-hidden col-start-1 col-span-3 row-start-1'>
       <audio src={audioSrc}></audio>
 
-      <div className='flex items-center gap-4 h-full '>
+      <div className='flex items-center h-full'>
         <AudioControls
           playing={playing}
           setIsPlaying={setPlaying}
-          type='listen'
+          recording={recording}
+          handleStopRecording={handleStopRecording}
         />
         <input
           type='range'
           value={trackProgress}
+          readOnly
           step='0.01'
           min='0'
           max={isNaN(audio.duration) ? '0.00' : audio.duration}
-          onChange={(e) => onScrub(e.target.value)}
           className='w-full h-[2px] bg-figmaGrayShade rounded-lg appearance-none cursor-pointer custom-range-input"'
-          onMouseUp={onScrubEnd}
-          onKeyUp={onScrubEnd}
         />
-        <div className='flex items-center gap-1 text-figmaGrayShade'>
+
+        {/* audio duration and time left */}
+        <div className='flex items-center gap-1 text-figmaGrayShade pl-5'>
           <span>{formatTime(audio.currentTime)}</span>
           <span>/</span>
           <span>

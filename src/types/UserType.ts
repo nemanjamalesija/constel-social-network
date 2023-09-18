@@ -4,3 +4,4 @@ export type UserAccountType = {
   full_name: string;
   picture: string;
 };
+

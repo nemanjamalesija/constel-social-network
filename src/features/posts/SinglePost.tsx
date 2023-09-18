@@ -3,7 +3,7 @@ import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
 import LikeButton from '../post/LikeButton';
 import CommentButton from '../post/CommentButton';
-import AudioPlayer from '../AudioPlayer/AudioPlayer';
+import AudioPlayer from '../Audio/AudioPlayer';
 import { memo } from 'react';
 import PostImage from '../../ui/PostImage';
 
@@ -17,7 +17,7 @@ const SinglePost = memo(() => {
   } = usePost();
 
   return (
-    <article className='bg-figmaGray py-4 px-6 rounded-lg'>
+    <article className='py-4 px-6 rounded-lg bg-figmaGray'>
       <div className='flex justify-between items-center mb-3'>
         <UserInfo username={username} full_name={full_name} picture={picture} />
         <PostDate created_at={created_at} />

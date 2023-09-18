@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons/faComment';
 import Modal from '../posts/Modal';
-import PostComments from './PostModal';
+import PostModal from './PostModal';
 import { usePost } from '../posts/PostContext';
 
 const CommentButton = ({ type }: { type: string }) => {
@@ -20,7 +20,7 @@ const CommentButton = ({ type }: { type: string }) => {
           </button>
         </Modal.Open>
         <Modal.Window name='post-comments'>
-          <PostComments />
+          <PostModal />
         </Modal.Window>
       </Modal>
     );

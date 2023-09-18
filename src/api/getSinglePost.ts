@@ -20,7 +20,7 @@ export default async function getSinglePost(id: string) {
     return;
   }
 
-  const { post } = await response.json();
+  const data = await response.json();
 
-  return { post };
+  return data.post;
 }

@@ -1,7 +1,7 @@
 import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import deleteComment from '../../api/deleteComment';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removeComment } from './commentsSlice';

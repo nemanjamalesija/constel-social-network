@@ -8,53 +8,41 @@ import LikeButton from './LikeButton';
 import CommentButton from './CommentButton';
 import WriteComment from '../comments/WriteComment';
 import AllComments from '../comments/AllComments';
-import AudioPlayer from '../AudioPlayer/AudioPlayer';
+import AudioPlayer from '../Audio/AudioPlayer';
 import PostImage from '../../ui/PostImage';
+import { PostType } from '../../types/postType';
 
-type PostWithCommentsType = {
-  audio: string | null;
-  created_at: string;
-  image: string;
-  liked: false;
-  post_id: string;
-  text: string;
-  user_id: string;
-};
-
-const PostWithComments = () => {
-  const {
-    post_id,
-    user: { username, full_name, picture },
-  } = usePost();
+const PostModal = () => {
+  const { post_id } = usePost();
   const [loading, setLoading] = useState(false);
-  const [post, setPost] = useState({} as PostWithCommentsType);
+  const [post, setPost] = useState({} as PostType);
 
   useEffect(() => {
-    (async () => {
+    const getPost = async () => {
       try {
         setLoading(true);
-        const postAPI = await getSinglePost(post_id);
+        const post = await getSinglePost(post_id);
+        setPost(post as PostType);
 
-        if (postAPI) {
-          const { post } = postAPI;
-          setPost(post as PostWithCommentsType);
-          setLoading(false);
-        }
+        setLoading(false);
       } catch (error) {
         console.log(error);
         setLoading(false);
       }
-    })();
+    };
+
+    getPost();
   }, []);
 
-  if (loading) return <Spinner />;
+  if (!post || !post.user || (!post.user.username && !loading))
+    return <Spinner />;
 
   return (
     <article className='shadow-lg py-4 px-6  bg-figmaGray rounded-lg max-w-2xl max-h-[700px] min-h-[360px] min-w-[620px] overflow-y-scroll'>
       <UserInfo
-        username={username}
-        full_name={full_name}
-        picture={picture}
+        username={post.user.username}
+        full_name={post.user.full_name}
+        picture={post.user.picture}
         fullNameClassname={post.image ? '' : 'mb-3'}
       />
       {post.image && (
@@ -71,7 +59,7 @@ const PostWithComments = () => {
 
       {post.audio && <AudioPlayer audioSrc={post.audio} />}
 
-      <WriteComment post_id={post_id} />
+      <WriteComment post_id={post.post_id} />
       <div className='flex gap-2 mb-4'>
         <LikeButton />
         <CommentButton type='dummy' />
@@ -81,4 +69,4 @@ const PostWithComments = () => {
   );
 };
 
-export default PostWithComments;
+export default PostModal;

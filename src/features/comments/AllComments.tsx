@@ -17,18 +17,18 @@ const AllComments = memo(() => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getComments = async () => {
+    (async () => {
       setLoading(true);
 
       const commentsAPI = await getAllComments(post_id);
       if (!commentsAPI) return;
 
       const { comments } = commentsAPI;
+
+      console.log(comments);
       dispatch(setComments(comments));
       setLoading(false);
-    };
-
-    if (!comments) getComments();
+    })();
   }, []);
 
   if (loading) return <Spinner />;
