@@ -61,6 +61,7 @@ const AudioRecorder = ({
     const analyzerNode = analyzerRef.current as AnalyserNode;
     const canvas = canvasRef.current as HTMLCanvasElement;
     const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
     analyzerNode.fftSize = 2048;
     const bufferLength = analyzerNode.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -70,17 +71,18 @@ const AudioRecorder = ({
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     ctx.moveTo(0, canvas.height / 2);
+
     // Clear the canvas before drawing the bars in each frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const barWidth = 5; // Adjust the width of each bar
-    let barsToDraw = 20;
-    let spacingScreen = 0;
+    let barsToDraw = 20; // How many bars
 
-    const barSpacing = canvas.width / barsToDraw - spacingScreen;
+    const barSpacing = canvas.width / barsToDraw;
     animationRef.current = window.requestAnimationFrame(visualizeData);
 
     for (let i = 0; i < barsToDraw; i++) {
+      // Get coordinates of each bar
       const x = i * barSpacing;
 
       // Create a gradient for the whole canvas
@@ -90,6 +92,7 @@ const AudioRecorder = ({
         canvas.width,
         canvas.height
       );
+
       gradient.addColorStop(0.2, '#005BCA');
 
       ctx.fillStyle = gradient;
@@ -136,7 +139,6 @@ const AudioRecorder = ({
     if (!mediaRecorder.current) return;
 
     console.log('stopping');
-
     mediaRecorder.current.stop();
 
     // Close the AudioContext
@@ -170,12 +172,6 @@ const AudioRecorder = ({
     };
   };
 
-  const restartRecordingHandler = () => {
-    setIsRecordButtonVisible(true);
-    setAudioFile(null);
-    startRecording();
-  };
-
   if (!permission) return null;
 
   return (
@@ -190,7 +186,6 @@ const AudioRecorder = ({
         handleStartRecording={startRecording}
         handleStopRecording={stopRecording}
         isRecordButtonVisible={isRecordButtonVisible}
-        handleRestartRecording={restartRecordingHandler}
       />
       {audioSrc && <AudioPlayer audioSrc={audioSrc} />}
 

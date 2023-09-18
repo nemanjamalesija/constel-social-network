@@ -3,7 +3,7 @@ import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
 import LikeButton from '../post/LikeButton';
 import CommentButton from '../post/CommentButton';
-import AudioPlayer from '../Audio/AudioPlayer';
+import AudioPlayer from '../audio/AudioPlayer';
 import { memo } from 'react';
 import PostImage from '../../ui/PostImage';
 

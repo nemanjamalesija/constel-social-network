@@ -5,7 +5,6 @@ type RecorderControlsType = {
   recording: boolean;
   handleStopRecording: () => void;
   handleStartRecording: () => void;
-  handleRestartRecording: () => void;
   isRecordButtonVisible: boolean;
 };
 

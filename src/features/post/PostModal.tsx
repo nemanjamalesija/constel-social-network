@@ -8,7 +8,7 @@ import LikeButton from './LikeButton';
 import CommentButton from './CommentButton';
 import WriteComment from '../comments/WriteComment';
 import AllComments from '../comments/AllComments';
-import AudioPlayer from '../Audio/AudioPlayer';
+import AudioPlayer from '../audio/AudioPlayer';
 import PostImage from '../../ui/PostImage';
 import { PostType } from '../../types/postType';
 

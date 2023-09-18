@@ -65,13 +65,14 @@ const LoginPage = () => {
     } finally {
       setTimeout(() => {
         setError({ type: '', message: '' });
+        setPassword('');
       }, 3000);
     }
   };
 
   return (
     <section id='login' className='relative'>
-      <div className='max-w-sm absolute left-1/2 -translate-x-1/2 translate-y-[30%] '>
+      <div className='max-w-sm absolute left-1/2 -translate-x-1/2 translate-y-[30%]  sma:px-4'>
         <div className='flex items-center'>
           <Logo width='386' height='94' viewBox='0 0 36 36' />
         </div>

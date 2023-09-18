@@ -22,7 +22,7 @@ const PostsParent = () => {
         if (postsAPI) {
           const { posts } = postsAPI;
 
-          dispatch(setPosts(posts as PostsType));
+          posts && dispatch(setPosts(posts as PostsType));
           setLoading(false);
         }
       } catch (error) {

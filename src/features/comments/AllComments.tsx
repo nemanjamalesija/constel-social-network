@@ -23,7 +23,7 @@ const AllComments = memo(() => {
 
       const { comments } = commentsAPI;
 
-      dispatch(setComments(comments));
+      comments && dispatch(setComments(comments));
       setLoading(false);
     })();
   }, []);

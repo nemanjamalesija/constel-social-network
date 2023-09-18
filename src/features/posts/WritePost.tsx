@@ -2,7 +2,7 @@ import createPost from '../../api/createPost';
 import { useGetUserData } from '../../hooks/useGetUserData';
 import ActionButton from '../../ui/ActionButton';
 import UserImage from '../../ui/UserImage';
-import AudioRecorder from '../Audio/AudioRecorder';
+import AudioRecorder from '../audio/AudioRecorder';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';

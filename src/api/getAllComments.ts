@@ -23,7 +23,7 @@ export default async function getAllComments(id: string) {
 
     const { comments } = await response.json();
 
-    return { comments };
+    return comments;
   } catch (error) {
     console.error(error);
     throw new Error('Could not get comments!');

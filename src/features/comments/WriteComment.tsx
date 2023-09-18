@@ -36,7 +36,7 @@ const WriteComment = memo(({ post_id }: { post_id: string }) => {
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}
       />
-      <button type='submit' className='-ml-4'>
+      <button type='submit' className='-ml-4' disabled={!commentText.trim()}>
         <FontAwesomeIcon
           icon={faPaperPlane}
           className='text-figmaGrayShade transition-all duration-200 text-xl'

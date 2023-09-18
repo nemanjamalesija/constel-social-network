@@ -1,30 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import AudioControls from './AudioControls';
+import formatTime from '../../helpers/formatTime';
 
 type AudioPlayerPropsType = {
   audioSrc: string;
   recording?: boolean;
   handleStartRecording?: () => void;
   handleStopRecording?: () => void;
-  canvasRef?: React.RefObject<HTMLCanvasElement>;
 };
 
 const AudioPlayer = ({
   audioSrc,
   recording,
-  canvasRef,
   handleStopRecording,
 }: AudioPlayerPropsType) => {
   const [audio] = useState(new Audio(audioSrc));
   const [playing, setPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
-
-  useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
 
   useEffect(() => {
     let interval: any;
@@ -41,6 +33,13 @@ const AudioPlayer = ({
     return () => clearInterval(interval);
   }, [playing, audio]);
 
+  useEffect(() => {
+    audio.addEventListener('ended', () => setPlaying(false));
+    return () => {
+      audio.removeEventListener('ended', () => setPlaying(false));
+    };
+  }, []);
+
   const startTimer = () => {
     const interval = setInterval(() => {
       if (audio.ended) {
@@ -51,21 +50,6 @@ const AudioPlayer = ({
       }
     }, 1000);
   };
-
-  function formatTime(time: number) {
-    let minutes: any = Math.round(time / 60);
-    let secs: any = Math.round(time % 60);
-
-    if (minutes < 10) {
-      minutes = '0' + minutes;
-    }
-
-    if (secs < 10) {
-      secs = '0' + secs;
-    }
-
-    return minutes + ':' + secs;
-  }
 
   return (
     <div className='py-6 px-4 bg-figmaGrayPlayer rounded-lg mb-3 overflow-hidden col-start-1 col-span-3 row-start-1'>
