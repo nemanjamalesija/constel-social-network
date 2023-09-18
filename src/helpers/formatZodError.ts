@@ -6,6 +6,7 @@ export default function formatZodError(error: ZodError): string {
   const errors = Object.values(formattedErrors).map((el) => el);
   const errorString = errors
     .filter((item) => Object.prototype.hasOwnProperty.call(item, '_errors'))
+    //@ts-ignore
     .map((item) => item._errors.join(', '))
     .join('; ');
 
