@@ -18,7 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true, // Enable this option if it's not already enabled
+    "forceConsistentCasingInFileNames": false, // Disable case sensitivity checking
+    "allowSyntheticDefaultImports": true // Enable this option if it's not already en
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
