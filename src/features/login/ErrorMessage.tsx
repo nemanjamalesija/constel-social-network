@@ -1,9 +1,9 @@
-type ErrorType = {
+type ErrorMessagePropsType = {
   type: string;
   message: string;
 };
 
-const ErrorMessage = ({ type, message }: ErrorType) => {
+const ErrorMessage = ({ type, message }: ErrorMessagePropsType) => {
   const returnElInput =
     type == 'email' || type == 'password' ? (
       <p className='text-sm text-figmaRed mt-1'>{message}</p>

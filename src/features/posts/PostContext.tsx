@@ -5,7 +5,7 @@ const PostContext = createContext({} as PostType);
 
 export function PostProvider({
   children,
-  postProps, // Receive the postProps from the parent component
+  postProps, // Pass postProps to children
 }: {
   children: ReactNode;
   postProps: PostType;

@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import getAllComments from '../../api/getAllComments';
 import { usePost } from '../posts/PostContext';
-import { useGetUserData } from '../../hooks/useGetUserData';
 import Spinner from '../../ui/Spinner';
 import { useGetCommentsData } from '../../hooks/useGetCommentsData';
-import { removeComment, setComments } from './commentsSlice';
+import { setComments } from './commentsSlice';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import deleteComment from '../../api/deleteComment';
 import SingleComment from './SingleComment';
 import { memo } from 'react';
 

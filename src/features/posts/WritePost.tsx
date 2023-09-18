@@ -49,12 +49,12 @@ const WritePost = () => {
           <div className='grid grid-cols-[50px,1fr,160px]'>
             <AudioRecorder
               setAudioFile={setAudioFile}
-              isRecording={isRecording}
-              setIsRecording={setIsRecording}
-              isRecordButtonVisible={isRecordButtonVisible}
-              setIsRecordButtonVisible={setIsRecordButtonVisible}
               audioSrc={audioSrc}
               setAudioSrc={setAudioSrc}
+              setIsRecording={setIsRecording}
+              isRecording={isRecording}
+              isRecordButtonVisible={isRecordButtonVisible}
+              setIsRecordButtonVisible={setIsRecordButtonVisible}
             />
 
             {/* // delete and submit button 

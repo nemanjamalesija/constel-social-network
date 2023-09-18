@@ -5,8 +5,8 @@ import PlayButton from './PlayButton';
 type AudioControlsType = {
   playing: boolean;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
-  recording: boolean;
-  handleStopRecording: () => void;
+  recording?: boolean;
+  handleStopRecording?: () => void;
 };
 
 const AudioControls = ({
@@ -30,7 +30,9 @@ const AudioControls = ({
           <PlayButton handleStartPlaying={startPlayingHandler} />
         )}
         {playing && <PauseButton handleStopState={stopPlayingHandler} />}
-        {recording && <PauseButton handleStopState={handleStopRecording} />}
+        {recording && (
+          <PauseButton handleStopState={handleStopRecording as () => void} />
+        )}
       </div>
     </div>
   );

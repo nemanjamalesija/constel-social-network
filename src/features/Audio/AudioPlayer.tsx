@@ -3,9 +3,9 @@ import AudioControls from './AudioControls';
 
 type AudioPlayerPropsType = {
   audioSrc: string;
-  recording: boolean;
-  handleStartRecording: () => void;
-  handleStopRecording: () => void;
+  recording?: boolean;
+  handleStartRecording?: () => void;
+  handleStopRecording?: () => void;
 };
 
 const AudioPlayer = ({

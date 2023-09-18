@@ -114,6 +114,7 @@ const AudioRecorder = ({
         handleRestartRecording={restartRecordingHandler}
       />
       {audioSrc && <AudioPlayer audioSrc={audioSrc} />}
+
       {isRecording && (
         <AudioPlayer
           audioSrc={audioSrc}
