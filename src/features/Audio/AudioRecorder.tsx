@@ -26,8 +26,9 @@ const AudioRecorder = ({
   const [permission, setPermission] = useState(false);
   const mediaRecorder = useRef<MediaRecorder>();
   const [stream, setStream] = useState<MediaStream>();
-
   const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const analyzer = useRef<AnalyserNode>(null);
 
   useEffect(() => {
     (async () => {
@@ -38,6 +39,7 @@ const AudioRecorder = ({
             video: false,
           });
           setPermission(true);
+
           setStream(mediaStream);
         } catch (error) {
           console.log(error);
@@ -49,6 +51,46 @@ const AudioRecorder = ({
     })();
   }, []);
 
+  // Function to draw the audio waveform on the canvas
+  const visualizeData = () => {
+    // Create a Uint8Array to hold the audio data
+    const analyzerNode = analyzer.current as AnalyserNode;
+    analyzerNode.fftSize = 2048;
+    const bufferLength = analyzerNode.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+    analyzerNode.getByteFrequencyData(dataArray);
+
+    const canvas = canvasRef.current as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+
+    const numBars = 10; // Adjust the number of bars to display
+    const barSpacing = canvas.width / numBars;
+    const barWidth = barSpacing * 0.6; // Adjust the width of each bar
+
+    window.requestAnimationFrame(visualizeData);
+
+    ctx.fillStyle = '#D9D9D9';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height / 2);
+
+    for (let i = 0; i < numBars; i++) {
+      const x = i * barSpacing;
+
+      // Create a gradient for the whole canvas
+      let gradient = ctx.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+      gradient.addColorStop(0.2, '#005BCA');
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(x, canvas.height, barWidth, -dataArray[i]);
+    }
+  };
+
   const startRecording = async () => {
     setIsRecording(true);
     setIsRecordButtonVisible(false);
@@ -57,6 +99,18 @@ const AudioRecorder = ({
       stream as MediaStream,
       { type: mimeType } as MediaRecorderOptions
     );
+
+    // audio context in order to display audio visualization
+    const audioContext = new AudioContext();
+
+    const sourceNode = audioContext.createMediaStreamSource(
+      stream as MediaStream
+    );
+
+    // audio processing
+    // add an analyzer node to visualize audio data
+    analyzer.current = audioContext.createAnalyser();
+    sourceNode.connect(analyzer.current);
 
     mediaRecorder.current = media;
     mediaRecorder.current.start();
@@ -70,6 +124,7 @@ const AudioRecorder = ({
     };
 
     setAudioChunks(localAudioChunks);
+    visualizeData(); // Start visualizing voice data
   };
 
   const stopRecording = () => {
@@ -106,6 +161,11 @@ const AudioRecorder = ({
 
   return (
     <>
+      <canvas
+        id='visualizer'
+        className='absolute top-1/2 z-50 bg-red-400'
+        ref={canvasRef}
+      ></canvas>
       <RecorderControls
         recording={isRecording}
         handleStartRecording={startRecording}
@@ -121,6 +181,7 @@ const AudioRecorder = ({
           recording={isRecording}
           handleStartRecording={startRecording}
           handleStopRecording={stopRecording}
+          canvasRef={canvasRef}
         />
       )}
     </>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AudioControls from './AudioControls';
 
 type AudioPlayerPropsType = {
@@ -6,12 +6,13 @@ type AudioPlayerPropsType = {
   recording?: boolean;
   handleStartRecording?: () => void;
   handleStopRecording?: () => void;
+  canvasRef?: any;
 };
 
 const AudioPlayer = ({
   audioSrc,
   recording,
-
+  canvasRef,
   handleStopRecording,
 }: AudioPlayerPropsType) => {
   const [audio] = useState(new Audio(audioSrc));
@@ -86,7 +87,6 @@ const AudioPlayer = ({
           max={isNaN(audio.duration) ? '0.00' : audio.duration}
           className='w-full h-[2px] bg-figmaGrayShade rounded-lg appearance-none cursor-pointer custom-range-input"'
         />
-
         {/* audio duration and time left */}
         <div className='flex items-center gap-1 text-figmaGrayShade pl-5'>
           <span>{formatTime(audio.currentTime)}</span>
@@ -99,6 +99,7 @@ const AudioPlayer = ({
             </span>
           </span>
         </div>
+        canva
       </div>
     </div>
   );
