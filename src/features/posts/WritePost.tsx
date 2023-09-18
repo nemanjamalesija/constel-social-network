@@ -33,11 +33,11 @@ const WritePost = () => {
   };
 
   return (
-    <section className='py-4 px-6 bg-figmaGray 6 rounded-lg'>
+    <section className='py-4 px-6 bg-figmaGray 6 rounded-lg relative'>
       <div className='grid grid-cols-[80px,1fr]'>
         <UserImage src={picture} alt={full_name} imgClassname='h-14 w-14 ' />
         <form
-          className='w-full '
+          className='w-full'
           onSubmit={(e) => {
             e.preventDefault();
             submitHandler(postText);

@@ -6,7 +6,7 @@ type AudioPlayerPropsType = {
   recording?: boolean;
   handleStartRecording?: () => void;
   handleStopRecording?: () => void;
-  canvasRef?: any;
+  canvasRef?: React.RefObject<HTMLCanvasElement>;
 };
 
 const AudioPlayer = ({
@@ -78,15 +78,21 @@ const AudioPlayer = ({
           recording={recording}
           handleStopRecording={handleStopRecording}
         />
-        <input
-          type='range'
-          value={trackProgress}
-          readOnly
-          step='0.01'
-          min='0'
-          max={isNaN(audio.duration) ? '0.00' : audio.duration}
-          className='w-full h-[2px] bg-figmaGrayShade rounded-lg appearance-none cursor-pointer custom-range-input"'
-        />
+        {/* if recording render straight line */}
+        {recording ? (
+          <hr className='w-full h-[2px] bg-figmaGrayShade'></hr>
+        ) : (
+          // else render input showing audio data
+          <input
+            type='range'
+            value={trackProgress}
+            readOnly
+            step='0.01'
+            min='0'
+            max={isNaN(audio.duration) ? '0.00' : audio.duration}
+            className='w-full h-[2px] bg-figmaGrayShade rounded-lg appearance-none custom-range-input"'
+          />
+        )}
         {/* audio duration and time left */}
         <div className='flex items-center gap-1 text-figmaGrayShade pl-5'>
           <span>{formatTime(audio.currentTime)}</span>
@@ -99,7 +105,6 @@ const AudioPlayer = ({
             </span>
           </span>
         </div>
-        canva
       </div>
     </div>
   );

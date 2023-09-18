@@ -18,7 +18,7 @@ const UserInfo = ({
   fullNameClassname,
 }: UserInfoType) => {
   return (
-    <div className='flex gap-3 items-center'>
+    <div className='flex gap-3 items-center sma:mb-2 smb:mb-2 md:mb-3'>
       <UserImage src={picture} alt={full_name} imgClassname={imgClassname} />
       <div className='flex flex-col'>
         <span className={`text-figmaGrayShade text-sm ${usernameClassname}`}>

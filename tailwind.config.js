@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -18,6 +21,14 @@ export default {
         figmaBlack: '#222222',
 
         figmaGrayPlayer: '#EFEFEF',
+      },
+
+      screens: {
+        smb: { max: '769px' },
+        // => @media (min-width: 640px) { ... }
+
+        sma: { max: '479px' },
+        ...defaultTheme.screens,
       },
     },
   },

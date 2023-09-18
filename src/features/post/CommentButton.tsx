@@ -7,14 +7,17 @@ import { usePost } from '../posts/PostContext';
 const CommentButton = ({ type }: { type: string }) => {
   const { comments } = usePost();
 
-  const className =
-    'py-1 px-6 bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white rounded-lg transition-all duration-200 flex items-center gap-2';
+  const baseStyle =
+    'sma:py-2 sma:px-[3.2rem] smb:px-[4.6rem] smb:py-3 md:px-6 sm:py-1 text-lg md:text-base  md:py-1  sm:text-base text-figmaGrayShade2 rounded-lg transition-all duration-200 flex items-center gap-2';
+
+  const colorsDefault =
+    'bg-figmaGrayLight hover:bg-figmaGrayShade text-figmaGrayShade2 hover:text-white';
 
   if (type == 'modal')
     return (
       <Modal>
         <Modal.Open opens='post-comments'>
-          <button className={className}>
+          <button className={`${baseStyle} ${colorsDefault}`}>
             <FontAwesomeIcon icon={faComment} />
             <span>{comments}</span>
           </button>
@@ -27,7 +30,7 @@ const CommentButton = ({ type }: { type: string }) => {
 
   if (type == 'dummy')
     return (
-      <button className={className}>
+      <button className={`${baseStyle} ${colorsDefault}`}>
         <FontAwesomeIcon icon={faComment} />
         <span>{comments}</span>
       </button>

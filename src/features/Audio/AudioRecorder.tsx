@@ -28,7 +28,12 @@ const AudioRecorder = ({
   const [stream, setStream] = useState<MediaStream>();
   const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const analyzer = useRef<AnalyserNode>(null);
+  const analyzerRef = useRef<AnalyserNode>(null);
+  const animationRef = useRef<number>(null); // Create a ref to store the request ID
+
+  // Audio context in order to display audio visualization
+  const audioContext = new AudioContext();
+  const windowWidth = window.innerWidth;
 
   useEffect(() => {
     (async () => {
@@ -54,27 +59,30 @@ const AudioRecorder = ({
   // Function to draw the audio waveform on the canvas
   const visualizeData = () => {
     // Create a Uint8Array to hold the audio data
-    const analyzerNode = analyzer.current as AnalyserNode;
+    const analyzerNode = analyzerRef.current as AnalyserNode;
+    const canvas = canvasRef.current as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
     analyzerNode.fftSize = 2048;
     const bufferLength = analyzerNode.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
     analyzerNode.getByteFrequencyData(dataArray);
 
-    const canvas = canvasRef.current as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-
-    const numBars = 10; // Adjust the number of bars to display
-    const barSpacing = canvas.width / numBars;
-    const barWidth = barSpacing * 0.6; // Adjust the width of each bar
-
-    window.requestAnimationFrame(visualizeData);
-
-    ctx.fillStyle = '#D9D9D9';
+    ctx.fillStyle = 'transparent';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     ctx.moveTo(0, canvas.height / 2);
+    // Clear the canvas before drawing the bars in each frame
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = 0; i < numBars; i++) {
+    const barSpacing = 12;
+    const barWidth = 5; // Adjust the width of each bar
+
+    console.log(canvas.width);
+    console.log(window.innerWidth);
+
+    animationRef.current = window.requestAnimationFrame(visualizeData);
+
+    for (let i = 0; i < canvas.width; i++) {
       const x = i * barSpacing;
 
       // Create a gradient for the whole canvas
@@ -100,17 +108,14 @@ const AudioRecorder = ({
       { type: mimeType } as MediaRecorderOptions
     );
 
-    // audio context in order to display audio visualization
-    const audioContext = new AudioContext();
-
     const sourceNode = audioContext.createMediaStreamSource(
       stream as MediaStream
     );
 
     // audio processing
     // add an analyzer node to visualize audio data
-    analyzer.current = audioContext.createAnalyser();
-    sourceNode.connect(analyzer.current);
+    analyzerRef.current = audioContext.createAnalyser();
+    sourceNode.connect(analyzerRef.current);
 
     mediaRecorder.current = media;
     mediaRecorder.current.start();
@@ -127,13 +132,29 @@ const AudioRecorder = ({
     visualizeData(); // Start visualizing voice data
   };
 
-  const stopRecording = () => {
+  const stopRecording = async () => {
     setIsRecording(false);
+
     if (!mediaRecorder.current) return;
 
     console.log('stopping');
 
     mediaRecorder.current.stop();
+
+    // Close the AudioContext
+    if (audioContext.state != 'closed') {
+      await audioContext.close();
+    }
+
+    // Cancel the animation frame using the stored request ID
+    if (animationRef.current) {
+      window.cancelAnimationFrame(animationRef.current);
+    }
+
+    // Clear the canvas
+    const canvas = canvasRef.current as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     mediaRecorder.current.onstop = () => {
       const audioBlob = new Blob(audioChunks, { type: mimeType });
@@ -163,7 +184,7 @@ const AudioRecorder = ({
     <>
       <canvas
         id='visualizer'
-        className='absolute top-1/2 z-50 bg-red-400'
+        className='py-3 absolute top-1/2 left-[53%] transform -translate-x-1/2 -translate-y-1/2 z-50  h-[36%] w-[55%]'
         ref={canvasRef}
       ></canvas>
       <RecorderControls
@@ -181,7 +202,6 @@ const AudioRecorder = ({
           recording={isRecording}
           handleStartRecording={startRecording}
           handleStopRecording={stopRecording}
-          canvasRef={canvasRef}
         />
       )}
     </>

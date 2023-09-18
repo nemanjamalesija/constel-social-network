@@ -4,7 +4,7 @@ import formatDate from '../helpers/formatDate';
 
 const PostDate = ({ created_at }: { created_at: string }) => {
   return (
-    <div className='flex gap-1 items-center self-start'>
+    <div className='flex gap-1 items-center self-start sma:mb-2 smb:mb-2 md:mb-3'>
       <FontAwesomeIcon
         className='h-3.5 w-3.5 text-figmaGrayShade'
         icon={faCalendar}

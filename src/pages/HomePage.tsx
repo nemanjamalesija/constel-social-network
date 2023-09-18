@@ -6,7 +6,7 @@ import Sidebar from '../ui/Sidebar';
 
 const HomePage = () => {
   return (
-    <div className='grid grid-cols-[300px,1fr,300px] max-w-[1366px] mx-auto'>
+    <div className='flex flex-col lg:grid grid-cols-[300px,1fr,300px] max-w-[1366px] mx-auto'>
       <LogoHome />
       <Sidebar />
       <HeadingPrimary />

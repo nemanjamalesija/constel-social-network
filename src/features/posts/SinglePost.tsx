@@ -27,13 +27,13 @@ const SinglePost = memo(() => {
         <PostImage src={image} alt={full_name} containerSize='max-h-[360px]' />
       )}
 
-      <p className='text-[15px] leading-[1.45rem] text-figmaBlack mb-3'>
+      <p className='sma:text-[0.88rem]  md:text-[0.95rem] md:leading-[1.45rem] text-figmaBlack mb-3'>
         {text}
       </p>
 
       {audio && <AudioPlayer audioSrc={audio} />}
 
-      <div className='flex gap-2'>
+      <div className='flex gap-2 justify-between sm:justify-start'>
         <LikeButton />
         <CommentButton type='modal' />
       </div>
