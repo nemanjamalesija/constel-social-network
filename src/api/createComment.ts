@@ -1,4 +1,4 @@
-import { CommentType } from '../types/CommentType';
+import toast from 'react-hot-toast/headless';
 import { baseUrl } from '../utils/baseUrl';
 
 export default async function createComment(id: string, text: string) {
@@ -20,14 +20,15 @@ export default async function createComment(id: string, text: string) {
     if (response.status === 400) {
       const { error } = await response.json();
 
-      alert(error.message);
-      return;
+      return toast.error(error.message);
     }
 
     const { comment } = await response.json();
+    toast.success('yes');
 
     return comment;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw new Error('Could not create the comment!');
   }
 }

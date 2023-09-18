@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { addNewPost } from './postsSlice';
+import toast from 'react-hot-toast';
 
 const WritePost = () => {
   const { full_name, picture } = useGetUserData();
@@ -19,17 +20,19 @@ const WritePost = () => {
   const [audioSrc, setAudioSrc] = useState<string>('');
 
   const submitHandler = async (text: string) => {
-    if (!text.trim()) return alert('post text cannot be empty');
+    if (!text.trim()) return toast.error('Post text cannot be empty!');
 
     const formData = new FormData();
 
-    if (audioFile) formData.append('audio', audioFile);
+    // audio file comming from the recorder
+    audioFile && formData.append('audio', audioFile);
 
     formData.append('text', postText);
     setPostText('');
 
     const post = await createPost(formData);
-    dispatch(addNewPost(post));
+
+    post && dispatch(addNewPost(post));
   };
 
   return (
@@ -45,7 +48,7 @@ const WritePost = () => {
           <UserImage src={picture} alt={full_name} imgClassname='h-14 w-14' />
           <input
             type='text'
-            className='input-comment py-2 w-full border-b border-figmaGrayShade  placeholder:text-figmaGrayShade md:bg-figmaGray smb:bg-#fff outline-none focus:border-figmaBlue transition-all duration-200 relative z-50'
+            className='input-comment py-2 w-full border-b border-figmaGrayShade  placeholder:text-figmaGrayShade md:bg-figmaGray smb:bg-#fff outline-none focus:border-figmaBlue transition-all duration-200 relative z-40'
             placeholder="What's happening"
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
@@ -92,7 +95,7 @@ const WritePost = () => {
                 : 'w-full md:col-start-3 smb:block md:flex md:justify-end'
             }`}
           >
-            <ActionButton disabled={!postText.trim()} screen='small' />
+            <ActionButton screen='small' disabled={!postText.trim()} />
           </div>
         </div>
       </form>

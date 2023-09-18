@@ -5,16 +5,19 @@ import createComment from '../../api/createComment';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { addNewComment } from './commentsSlice';
 import { memo } from 'react';
+import toast from 'react-hot-toast';
 
 const WriteComment = memo(({ post_id }: { post_id: string }) => {
   const dispatch = useAppDispatch();
   const [commentText, setCommentText] = useState('');
 
   const submitHandler = async () => {
-    if (!commentText.trim()) return alert('Comment text cannot be empty!');
+    if (!commentText.trim())
+      return toast.error('Text comment cannot be empty!');
+
     const comment = await createComment(post_id, commentText);
 
-    dispatch(addNewComment(comment));
+    comment && dispatch(addNewComment(comment));
     setCommentText('');
   };
 

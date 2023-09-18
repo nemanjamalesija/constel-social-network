@@ -1,5 +1,6 @@
 import { PostType } from '../types/postType';
 import { baseUrl } from '../utils/baseUrl';
+import toast from 'react-hot-toast';
 
 export default async function createPost(
   data: FormData
@@ -16,10 +17,10 @@ export default async function createPost(
       body: data,
     });
 
-    if (response.status === 400) {
+    if (response.status == 400) {
       const { error } = await response.json();
 
-      alert(error.message);
+      toast.error(error.message);
       return;
     }
 
@@ -27,6 +28,7 @@ export default async function createPost(
 
     return post;
   } catch (error) {
-    console.log('error');
+    console.error(error);
+    throw new Error('Could not create post!');
   }
 }

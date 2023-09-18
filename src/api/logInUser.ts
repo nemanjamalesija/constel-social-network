@@ -14,16 +14,14 @@ export default async function logInUser(email: string, password: string) {
 
   try {
     if (response.status === 400) {
-      const { error } = await response.json();
-
-      alert(error.message);
-      return;
+      const { status, error } = await response.json();
+      return { status, error };
     }
 
     const { token } = await response.json();
-
-    return { token };
+    localStorage.setItem('jwt', token);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw new Error('Could not log in!');
   }
 }

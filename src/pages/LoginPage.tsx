@@ -18,8 +18,7 @@ const LoginPage = () => {
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
   const navigate = useNavigate();
 
-  // this line returns boollean and controls the disabled prop on the log in button (<ActionButton />). Remove the disabled prop to see input error handling
-
+  // the line below boollean and controls the disabled prop on the log in button (<ActionButton />). Remove the disabled prop to see input error handling
   const allFieldsCompleted = loginValidator.safeParse({
     email,
     password,
@@ -38,14 +37,15 @@ const LoginPage = () => {
         password,
       });
 
-      const { status, error } = await logInUser(
-        tryUser.email,
-        tryUser.password
-      );
+      const response = await logInUser(tryUser.email, tryUser.password);
 
-      if (status !== 'ok') {
-        setError({ type: 'server', message: error.message });
-        return;
+      if (response) {
+        const { status, error } = response;
+
+        if (status !== 'ok') {
+          setError({ type: 'server', message: error.message });
+          return;
+        }
       }
     } catch (error) {
       if (error instanceof ZodError) {
