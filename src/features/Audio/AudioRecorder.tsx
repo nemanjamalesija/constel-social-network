@@ -79,6 +79,7 @@ const AudioRecorder = ({
     let barsToDraw = 20; // How many bars
 
     const barSpacing = canvas.width / barsToDraw;
+    //@ts-ignore
     animationRef.current = window.requestAnimationFrame(visualizeData);
 
     for (let i = 0; i < barsToDraw; i++) {
@@ -115,6 +116,7 @@ const AudioRecorder = ({
 
     // audio processing
     // add an analyzer node to visualize audio data
+    //@ts-ignore
     analyzerRef.current = audioContext.createAnalyser();
     sourceNode.connect(analyzerRef.current);
 
