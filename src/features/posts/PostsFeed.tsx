@@ -21,7 +21,6 @@ const PostsParent = () => {
 
         if (postsAPI) {
           const { posts } = postsAPI;
-          console.log(posts);
 
           dispatch(setPosts(posts as PostsType));
           setLoading(false);

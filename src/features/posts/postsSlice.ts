@@ -13,6 +13,10 @@ const postsSlice = createSlice({
       state.posts = action.payload;
     },
 
+    addNewPost(state, action) {
+      state.posts.push(action.payload);
+    },
+
     postLike(state, action) {
       const id = action.payload;
 
@@ -38,6 +42,7 @@ const postsSlice = createSlice({
 });
 
 export const postsReducer = postsSlice.reducer;
-export const { setPosts, postLike, postUnlike } = postsSlice.actions;
+export const { setPosts, addNewPost, postLike, postUnlike } =
+  postsSlice.actions;
 
 export default postsSlice.reducer;

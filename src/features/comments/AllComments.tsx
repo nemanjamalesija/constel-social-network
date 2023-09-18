@@ -23,7 +23,6 @@ const AllComments = memo(() => {
 
       const { comments } = commentsAPI;
 
-      console.log(comments);
       dispatch(setComments(comments));
       setLoading(false);
     })();

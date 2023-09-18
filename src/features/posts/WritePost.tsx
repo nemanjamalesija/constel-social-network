@@ -6,9 +6,12 @@ import AudioRecorder from '../Audio/AudioRecorder';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { addNewPost } from './postsSlice';
 
 const WritePost = () => {
   const { full_name, picture } = useGetUserData();
+  const dispatch = useAppDispatch();
   const [audioFile, setAudioFile] = useState<File | null>(null);
   const [postText, setPostText] = useState('');
   const [isRecording, setIsRecording] = useState(false);
@@ -25,7 +28,8 @@ const WritePost = () => {
     formData.append('text', postText);
     setPostText('');
 
-    await createPost(formData);
+    const post = await createPost(formData);
+    dispatch(addNewPost(post));
   };
 
   return (
