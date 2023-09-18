@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Sidebar = () => {
   return (
-    <aside className='p-6 gap-2 col-start-1 row-start-2 hidden sm:block '>
+    <aside className='p-6 gap-2 col-start-1 row-start-2 md:hidden smb:hidden'>
       <FontAwesomeIcon
         icon={faHome}
         className='text-figmaBlue cursor-pointer h-5 w-5 inline-block mr-4'

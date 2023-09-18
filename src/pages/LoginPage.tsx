@@ -113,9 +113,7 @@ const LoginPage = () => {
             <ErrorMessage type={error.type} message={error.message} />
           )}
           <div className='text-center'>
-            <ActionButton className='mt-6' disabled={!allFieldsCompleted}>
-              Log in
-            </ActionButton>
+            <ActionButton className='mt-6' disabled={!allFieldsCompleted} />
           </div>
         </form>
       </div>

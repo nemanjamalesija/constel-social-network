@@ -34,7 +34,7 @@ const WritePost = () => {
 
   return (
     <section className='py-4 px-6 bg-figmaGray 6 rounded-lg relative'>
-      <div className='grid grid-cols-[80px,1fr]'>
+      <div className='md:grid grid-cols-[80px,1fr]'>
         <UserImage src={picture} alt={full_name} imgClassname='h-14 w-14 ' />
         <form
           className='w-full'
@@ -50,7 +50,7 @@ const WritePost = () => {
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
           />
-          <div className='grid grid-cols-[50px,1fr,160px]'>
+          <div className='md:grid md:grid-cols-[50px,1fr,160px]'>
             <AudioRecorder
               setAudioFile={setAudioFile}
               audioSrc={audioSrc}
@@ -85,10 +85,10 @@ const WritePost = () => {
               className={`${
                 isRecording
                   ? 'row-start-2 col-start-3 flex justify-end'
-                  : 'col-start-3 flex justify-end'
+                  : 'w-full md:col-start-3 smb:block md:flex md:justify-end'
               }`}
             >
-              <ActionButton>Confirm</ActionButton>
+              <ActionButton screen='small' />
             </div>
           </div>
         </form>

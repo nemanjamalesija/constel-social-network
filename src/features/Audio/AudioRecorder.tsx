@@ -33,7 +33,6 @@ const AudioRecorder = ({
 
   // Audio context in order to display audio visualization
   const audioContext = new AudioContext();
-  const windowWidth = window.innerWidth;
 
   useEffect(() => {
     (async () => {
@@ -74,15 +73,14 @@ const AudioRecorder = ({
     // Clear the canvas before drawing the bars in each frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const barSpacing = 12;
     const barWidth = 5; // Adjust the width of each bar
+    let barsToDraw = 20;
+    let spacingScreen = 0;
 
-    console.log(canvas.width);
-    console.log(window.innerWidth);
-
+    const barSpacing = canvas.width / barsToDraw - spacingScreen;
     animationRef.current = window.requestAnimationFrame(visualizeData);
 
-    for (let i = 0; i < canvas.width; i++) {
+    for (let i = 0; i < barsToDraw; i++) {
       const x = i * barSpacing;
 
       // Create a gradient for the whole canvas
@@ -184,7 +182,7 @@ const AudioRecorder = ({
     <>
       <canvas
         id='visualizer'
-        className='py-3 absolute top-1/2 left-[53%] transform -translate-x-1/2 -translate-y-1/2 z-50  h-[36%] w-[55%]'
+        className='md:pb-4 md:pt-3 smb:pb-1 smb:pt-14 sma:pt-[3.2rem] absolute top-1/2 md:left-[53%] sma:left-[44%] smb:left-[43%] transform -translate-x-1/2 -translate-y-1/2 z-40  h-[36%] smb:w-[46%] smb:pl-2 sma:pl-0 sma:w-[35%] sma:pr-4 md:w-[53%] overflow-hidden'
         ref={canvasRef}
       ></canvas>
       <RecorderControls
