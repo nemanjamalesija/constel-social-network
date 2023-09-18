@@ -28,7 +28,7 @@ const WriteComment = memo(({ post_id }: { post_id: string }) => {
     >
       <input
         type='text'
-        className='input-comment py-2 border-b border-figmaGrayShade w-full placeholder:text-figmaGrayShade bg-figmaGray outline-none focus:border-figmaBlue transition-all duration-200'
+        className='input-comment py-2 border-b border-figmaGrayShade w-full placeholder:text-figmaGrayShade md:bg-figmaGray smb:bg-white outline-none focus:border-figmaBlue transition-all duration-200'
         placeholder='Write a comment'
         value={commentText}
         onChange={(e) => setCommentText(e.target.value)}

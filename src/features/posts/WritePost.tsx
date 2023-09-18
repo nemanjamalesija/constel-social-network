@@ -33,7 +33,7 @@ const WritePost = () => {
   };
 
   return (
-    <section className='py-4 px-6 bg-figmaGray 6 rounded-lg relative'>
+    <section className='py-4 px-6 md:bg-figmaGray smb:bg-#fff rounded-lg relative'>
       <form
         className='w-full '
         onSubmit={(e) => {
@@ -45,7 +45,7 @@ const WritePost = () => {
           <UserImage src={picture} alt={full_name} imgClassname='h-14 w-14' />
           <input
             type='text'
-            className='input-comment py-2 w-full border-b border-figmaGrayShade  placeholder:text-figmaGrayShade bg-figmaGray outline-none focus:border-figmaBlue transition-all duration-200'
+            className='input-comment py-2 w-full border-b border-figmaGrayShade  placeholder:text-figmaGrayShade md:bg-figmaGray smb:bg-#fff outline-none focus:border-figmaBlue transition-all duration-200 relative z-50'
             placeholder="What's happening"
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
@@ -68,7 +68,7 @@ const WritePost = () => {
             type='button'
             className={`${
               audioFile
-                ? 'flex items-center smb:mb-3 smb:text-figmaRed smb:text-base smb:font-medium smb:justify-center smb:w-full md:justify-end md:col-start-2  md:mr-4 transition-all duration-200 '
+                ? 'flex items-center smb:mb-3 smb:text-figmaRed smb:hover:text-figmaRedShade smb:text-base smb:font-medium smb:justify-center smb:w-full md:justify-end md:col-start-2 md:mr-4 transition-all duration-200 cursor-pointer '
                 : 'hidden'
             }`}
             onClick={() => {
@@ -92,7 +92,7 @@ const WritePost = () => {
                 : 'w-full md:col-start-3 smb:block md:flex md:justify-end'
             }`}
           >
-            <ActionButton screen='small' />
+            <ActionButton disabled={!postText.trim()} screen='small' />
           </div>
         </div>
       </form>

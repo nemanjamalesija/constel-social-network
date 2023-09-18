@@ -10,7 +10,7 @@ const HomePage = () => {
       <LogoHome />
       <Sidebar />
       <HeadingPrimary />
-      <section className='p-6 flex flex-col gap-6 col-start-2 border-l border-r border-figmaGrayLight '>
+      <section className='md:p-6 smb:p-4 sma:p-2 flex flex-col gap-6 col-start-2 border-l border-r border-figmaGrayLight '>
         <WritePost />
         <PostsFeed />
       </section>

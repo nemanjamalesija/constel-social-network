@@ -17,7 +17,7 @@ const SinglePost = memo(() => {
   } = usePost();
 
   return (
-    <article className='py-4 px-6 rounded-lg bg-figmaGray'>
+    <article className='py-4 px-6 rounded-lg md:bg-figmaGray smb:bg-#fff'>
       <div className='flex justify-between items-center mb-3'>
         <UserInfo username={username} full_name={full_name} picture={picture} />
         <PostDate created_at={created_at} />

@@ -38,7 +38,7 @@ const PostModal = () => {
     return <Spinner />;
 
   return (
-    <article className=' py-4 px-6 max-w-2xl sma:max-h-[600px] smb:max-h-[550px] md:max-h-[700px] min-h-[360px] lg:min-w-[620px]  bg-figmaGray  shadow-lg  rounded-lg overflow-y-scroll'>
+    <article className=' py-4 px-6 max-w-2xl sma:max-h-[600px] smb:max-h-[550px] md:max-h-[700px] min-h-[360px] lg:min-w-[620px]  smb:bg-white md:bg-figmaGray shadow-lg  rounded-lg overflow-y-scroll'>
       <UserInfo
         username={post.user.username}
         full_name={post.user.full_name}
