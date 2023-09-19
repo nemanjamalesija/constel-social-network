@@ -30,7 +30,7 @@ const AudioRecorder = memo(
     const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const analyzerRef = useRef<AnalyserNode>(null);
-    const animationRef = useRef<number>(null); // Create a ref to store the request ID
+    const animationRef = useRef<number>(null); // Create a ref to store the animation ID
 
     // Audio context in order to display audio visualization
     const audioContext = new AudioContext();
@@ -180,7 +180,7 @@ const AudioRecorder = memo(
     return (
       <>
         {/* Canvas is on top of the audio player. 
-        On start recording we make it transparent and only keep the bars */}
+        On start recording we make it transparent and only keep audio bars */}
         <canvas
           id='visualizer'
           className='absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sma:left-[44%] sma:pr-2 sma:pb-[1.1rem] sma:pt-[1.3rem] sma:pl-0 sma:w-[35%] smb:w-[49%] smb:left-[43%] smb:pt-6 smb:pb-4 smb:pl-4 md:w-[60%] md:left-[46%] md:pb-4 md:pt-3 h-[36%] overflow-hidden'
