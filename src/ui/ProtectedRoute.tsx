@@ -23,11 +23,15 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
         const account = await getCurrentUser();
 
         const { username, full_name, picture } = account;
-        dispatch(setUser({ username, full_name, picture } as UserAccountType));
+
+        username &&
+          dispatch(
+            setUser({ username, full_name, picture } as UserAccountType)
+          );
 
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error('Error getting the user:', error);
         setLoading(false);
       }
     };
