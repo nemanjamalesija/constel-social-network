@@ -38,11 +38,22 @@ const postsSlice = createSlice({
       currentPost.likes--;
       currentPost.liked = false;
     },
+
+    removePost(state, action) {
+      const id = action.payload;
+
+      const indexToUpdate = state.posts.findIndex((p) => p.post_id == id);
+
+      if (indexToUpdate !== -1) {
+        // Remove the old object
+        state.posts.splice(indexToUpdate, 1);
+      }
+    },
   },
 });
 
 export const postsReducer = postsSlice.reducer;
-export const { setPosts, addNewPost, postLike, postUnlike } =
+export const { setPosts, addNewPost, postLike, postUnlike, removePost } =
   postsSlice.actions;
 
 export default postsSlice.reducer;

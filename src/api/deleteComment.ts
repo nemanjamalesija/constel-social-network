@@ -22,7 +22,9 @@ export default async function deleteComment(postId: string, commentId: string) {
       return;
     }
 
-    await response.json();
+    const { status } = await response.json();
+
+    return status;
   } catch (error) {
     console.error(error);
     throw new Error('Could not delete the comment.');

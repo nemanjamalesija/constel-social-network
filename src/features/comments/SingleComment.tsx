@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removeComment } from './commentsSlice';
 import { useGetUserData } from '../../hooks/useGetUserData';
 import { memo } from 'react';
+import toast from 'react-hot-toast';
 
 interface UserInfoProps {
   comment_id: string;
@@ -32,8 +33,11 @@ const SingleComment = memo(
     const { username: currentUserUsername } = useGetUserData();
 
     const deleteCommentHandler = async (postId: string, commentId: string) => {
-      await deleteComment(postId, commentId);
-      dispatch(removeComment(commentId));
+      const status = await deleteComment(postId, commentId);
+
+      status == 'ok' &&
+        dispatch(removeComment(commentId)) &&
+        toast.success('Comment succesfully deleted.');
     };
 
     return (
@@ -50,7 +54,7 @@ const SingleComment = memo(
           <div className='flex items-center gap-3 smb:flex-col smb:gap-0 smb:items-end'>
             <PostDate created_at={created_at} />
 
-            {/* if post belongs to the current user allow delete */}
+            {/* if comment belongs to the current user allow delete */}
             {username === currentUserUsername && (
               <button
                 className='flex items-center gap-1 text-sm text-figmaRed capitalize   md:self-start'

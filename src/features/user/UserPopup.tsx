@@ -19,7 +19,7 @@ const UserPopup = () => {
   };
 
   return (
-    <div className='smb:absolute -top-1 right-4 z-[999]'>
+    <div className='smb:absolute -top-1 right-4 z-[99]'>
       <div className='relative smb:pt-5 sm:pt-5 flex items-center justify-end max-h-16 gap-4 '>
         <button onClick={() => toggleAccount(!account)}>
           <UserImage
