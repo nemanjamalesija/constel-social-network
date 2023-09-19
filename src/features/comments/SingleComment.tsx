@@ -43,7 +43,9 @@ const SingleComment = memo(
     return (
       <article
         className={`${
-          username === currentUserUsername ? 'pb-6' : ''
+          username === currentUserUsername
+            ? 'border-b-2 border-b-figmaGrayLight mb-[1.66rem]'
+            : ''
         } w-full  smb:relative`}
       >
         <div className='flex justify-between items-center'>
@@ -61,7 +63,7 @@ const SingleComment = memo(
             {/* if comment belongs to the current user allow delete */}
             {username === currentUserUsername && (
               <button
-                className='flex items-center gap-1 text-sm text-figmaRed capitalize md:self-start smb:absolute hover:text-figmaRedShade smb:bottom-3 smb:left-1/2 
+                className='flex items-center gap-1 text-sm text-figmaRed capitalize md:self-start smb:absolute hover:text-figmaRedShade smb:-bottom-4 smb:left-1/2 
                 smb:text-sm smb:-translate-x-1/2 smb:translate-y-1/2'
                 onClick={() => {
                   deleteCommentHandler(post_id, comment_id);

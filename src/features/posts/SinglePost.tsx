@@ -37,7 +37,9 @@ const SinglePost = memo(() => {
   return (
     <article
       className={`${
-        username === currentUserUsername ? 'pb-6' : ''
+        username === currentUserUsername
+          ? ' border-b-2 border-b-figmaGrayLight mb-8'
+          : ''
       } py-4 px-6 rounded-lg md:bg-figmaGray smb:bg-#fff smb:relative`}
     >
       <div className='flex justify-between items-center mb-3 '>
@@ -48,8 +50,8 @@ const SinglePost = memo(() => {
           {/* if post belongs to the current user allow delete */}
           {username == currentUserUsername && (
             <button
-              className='flex items-center gap-1 text-sm text-figmaRed hover:text-figmaRedShade capitalize  md:self-start smb:absolute smb:bottom-0 smb:left-1/2 
-              smb:text-base smb:-translate-x-1/2 smb:translate-y-1/2'
+              className='flex items-center gap-1 text-sm text-figmaRed hover:text-figmaRedShade capitalize  md:self-start smb:absolute smb:-bottom-5 smb:left-1/2 
+              smb:text-base smb:-translate-x-1/2 smb:translate-y-1/2 '
               onClick={deletePostHandler}
             >
               <FontAwesomeIcon icon={faTrashCan} />
