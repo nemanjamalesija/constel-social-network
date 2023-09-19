@@ -9,7 +9,7 @@ const ins = 'opacity-1 py-3';
 const outs = 'opacity-0 invisible';
 
 const UserPopup = () => {
-  const [account, toggleAccount] = useState(false);
+  const [account, toggleAccount] = useState<boolean>(false);
   const navigate = useNavigate();
   const { full_name, picture } = useGetUserData();
 
@@ -25,7 +25,7 @@ const UserPopup = () => {
           <UserImage
             src={picture}
             alt={full_name}
-            imgClassname='smb:h-9 smb:w-9 lg:h-10 lg:w-10'
+            imgClassname='smb:h-9 smb:w-9 lg:h-10 lg:w-10 shadow-lg'
           />
         </button>
         <div

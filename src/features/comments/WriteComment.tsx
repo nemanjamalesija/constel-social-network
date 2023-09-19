@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 
 const WriteComment = memo(({ post_id }: { post_id: string }) => {
   const dispatch = useAppDispatch();
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState<string>('');
 
   const submitHandler = async () => {
     if (!commentText.trim())

@@ -13,7 +13,7 @@ const AllComments = memo(() => {
 
   const dispatch = useAppDispatch();
   const { comments } = useGetCommentsData();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {

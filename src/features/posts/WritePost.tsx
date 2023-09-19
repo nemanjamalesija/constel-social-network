@@ -14,9 +14,10 @@ const WritePost = () => {
   const { full_name, picture } = useGetUserData();
   const dispatch = useAppDispatch();
   const [audioFile, setAudioFile] = useState<File | null>(null);
-  const [postText, setPostText] = useState('');
-  const [isRecording, setIsRecording] = useState(false);
-  const [isRecordButtonVisible, setIsRecordButtonVisible] = useState(true);
+  const [postText, setPostText] = useState<string>('');
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [isRecordButtonVisible, setIsRecordButtonVisible] =
+    useState<boolean>(true);
   const [audioSrc, setAudioSrc] = useState<string>('');
 
   const submitHandler = async (text: string) => {

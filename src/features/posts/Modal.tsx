@@ -16,6 +16,8 @@ const ModalContext = createContext({} as any);
 function Modal({ children }: { children: ReactNode }) {
   const [openName, setOpenName] = useState('');
 
+  // references 2 states of setOpen function
+  // used to controll open and close state of modal
   const close = () => setOpenName('');
   const open = setOpenName;
 

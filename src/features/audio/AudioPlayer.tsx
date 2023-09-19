@@ -15,8 +15,8 @@ const AudioPlayer = ({
   handleStopRecording,
 }: AudioPlayerPropsType) => {
   const [audio] = useState(new Audio(audioSrc));
-  const [playing, setPlaying] = useState(false);
-  const [trackProgress, setTrackProgress] = useState(0);
+  const [playing, setPlaying] = useState<boolean>(false);
+  const [trackProgress, setTrackProgress] = useState<number>(0);
 
   useEffect(() => {
     let interval: any;
