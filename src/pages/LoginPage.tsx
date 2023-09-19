@@ -18,7 +18,9 @@ const LoginPage = () => {
   const [error, setError] = useState<ErrorType>({ type: '', message: '' });
   const navigate = useNavigate();
 
-  // the line below boollean and controls the disabled prop on the log in button (<ActionButton />). Remove the disabled prop to see input error handling
+  // the line below returns boollean and controls
+  // the disabled prop on the log in button (<ActionButton />).
+  // Remove the disabled prop to see input error handling.
   const allFieldsCompleted = loginValidator.safeParse({
     email,
     password,
@@ -42,7 +44,7 @@ const LoginPage = () => {
       if (response) {
         const { status, error } = response;
 
-        if (status !== 'ok') {
+        if (status != 'ok') {
           setError({ type: 'server', message: error.message });
           return;
         }
@@ -61,19 +63,19 @@ const LoginPage = () => {
       } else {
         setError({
           type: 'server',
-          message: 'Oops, something went wrong',
+          message: 'Oops, something went wrong.',
         });
       }
     } finally {
       setTimeout(() => {
         setError({ type: '', message: '' });
-      }, 3000);
+      }, 5000);
     }
   };
 
   return (
     <section id='login' className='relative'>
-      <div className='max-w-sm absolute left-1/2 -translate-x-1/2 translate-y-[30%]  sma:px-4'>
+      <div className='max-w-sm absolute left-1/2 -translate-x-1/2 translate-y-[30%] sma:px-4'>
         <div className='flex items-center'>
           <Logo width='386' height='94' viewBox='0 0 36 36' />
         </div>
