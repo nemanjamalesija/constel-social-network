@@ -105,7 +105,7 @@ const AudioRecorder = memo(
     const startRecording = async () => {
       setIsRecording(true);
       setIsRecordButtonVisible(false);
-      console.log('recording');
+
       const media = new MediaRecorder(
         stream as MediaStream,
         { type: mimeType } as MediaRecorderOptions
@@ -115,7 +115,7 @@ const AudioRecorder = memo(
         stream as MediaStream
       );
 
-      // audio processing
+      // Audio processing
       // add an analyzer node to visualize audio data
       //@ts-ignore
       analyzerRef.current = audioContext.createAnalyser();
@@ -141,7 +141,7 @@ const AudioRecorder = memo(
 
       if (!mediaRecorder.current) return;
 
-      console.log('stopping');
+      // Stop recording
       mediaRecorder.current.stop();
 
       // Close the AudioContext
@@ -179,6 +179,8 @@ const AudioRecorder = memo(
 
     return (
       <>
+        {/* Canvas is on top of the audio player. 
+        On start recording we make it transparent and only keep the bars */}
         <canvas
           id='visualizer'
           className='absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sma:left-[44%] sma:pr-2 sma:pb-[1.1rem] sma:pt-[1.3rem] sma:pl-0 sma:w-[35%] smb:w-[49%] smb:left-[43%] smb:pt-6 smb:pb-4 smb:pl-4 md:w-[60%] md:left-[46%] md:pb-4 md:pt-3 h-[36%] overflow-hidden'
