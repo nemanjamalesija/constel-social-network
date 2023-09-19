@@ -26,6 +26,6 @@ export default async function getAllComments(id: string) {
     return comments;
   } catch (error) {
     console.error(error);
-    throw new Error('Could not get comments!');
+    throw new Error('Could not get comments.');
   }
 }

@@ -1,21 +1,20 @@
 import WritePost from '../features/posts/WritePost';
 import HeadingPrimary from '../ui/HeadingPrimary';
 import PostsFeed from '../features/posts/PostsFeed';
-import LogoHome from '../ui/LogoHome';
 import Sidebar from '../ui/Sidebar';
+import UserPopup from '../features/user/UserPopup';
 
 const HomePage = () => {
   return (
-    <div className='flex flex-col lg:grid grid-cols-[300px,1fr,300px] max-w-[1366px] mx-auto'>
-      <LogoHome />
+    <div className='flex flex-col md:items:center md:justify-center lg:grid grid-cols-[300px,1fr,300px] max-w-[1366px] mx-auto'>
       <Sidebar />
       <HeadingPrimary />
-      <section className='md:p-6 smb:p-4 sma:p-2 flex flex-col gap-6 col-start-2 border-l border-r border-figmaGrayLight '>
+      <section className='md:p-6 flex flex-col gap-6 col-start-2 border-l border-r border-figmaGrayLight '>
         <WritePost />
         <PostsFeed />
       </section>
 
-      <section className='user-info'></section>
+      <UserPopup />
     </div>
   );
 };

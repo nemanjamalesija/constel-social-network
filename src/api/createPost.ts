@@ -25,10 +25,11 @@ export default async function createPost(
     }
 
     const { post } = await response.json();
+    toast.success('Post successfully created.');
 
     return post;
   } catch (error) {
     console.error(error);
-    throw new Error('Could not create post!');
+    throw new Error('Could not create post.');
   }
 }

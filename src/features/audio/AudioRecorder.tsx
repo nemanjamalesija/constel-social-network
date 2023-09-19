@@ -180,7 +180,7 @@ const AudioRecorder = ({
     <>
       <canvas
         id='visualizer'
-        className='absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 sma:left-[44%] sma:pr-2 sma:pb-[1.1rem] sma:pt-[1.3rem] sma:pl-0 sma:w-[35%] smb:w-[49%] smb:left-[43%] smb:pt-6 smb:pb-4 smb:pl-4 md:w-[60%] md:left-[46%] md:pb-4 md:pt-3 h-[36%] overflow-hidden'
+        className='absolute top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 sma:left-[44%] sma:pr-2 sma:pb-[1.1rem] sma:pt-[1.3rem] sma:pl-0 sma:w-[35%] smb:w-[49%] smb:left-[43%] smb:pt-6 smb:pb-4 smb:pl-4 md:w-[60%] md:left-[46%] md:pb-4 md:pt-3 h-[36%] overflow-hidden'
         ref={canvasRef}
       ></canvas>
       <RecorderControls

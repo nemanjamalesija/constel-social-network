@@ -47,6 +47,8 @@ const LoginPage = () => {
           return;
         }
       }
+
+      navigate('/home');
     } catch (error) {
       if (error instanceof ZodError) {
         const formatedError = formatZodError(error);

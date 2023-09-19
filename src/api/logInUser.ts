@@ -22,6 +22,6 @@ export default async function logInUser(email: string, password: string) {
     localStorage.setItem('jwt', token);
   } catch (error) {
     console.error(error);
-    throw new Error('Could not log in!');
+    throw new Error('Could not log in.');
   }
 }

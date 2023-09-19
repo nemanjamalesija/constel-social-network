@@ -22,6 +22,6 @@ export default async function unlikePost(id: string) {
     await response.json();
   } catch (error) {
     console.error(error);
-    throw new Error('Could not unlike post!');
+    throw new Error('Could not unlike post.');
   }
 }

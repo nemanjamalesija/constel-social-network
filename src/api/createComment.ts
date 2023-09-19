@@ -24,11 +24,11 @@ export default async function createComment(id: string, text: string) {
     }
 
     const { comment } = await response.json();
-    toast.success('yes');
+    toast.success('Comment successfully created.');
 
     return comment;
   } catch (error) {
     console.error(error);
-    throw new Error('Could not create the comment!');
+    throw new Error('Could not create the comment.');
   }
 }

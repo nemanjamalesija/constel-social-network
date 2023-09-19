@@ -28,6 +28,7 @@ const FormInput = ({
       placeholder={placeholder}
       value={value}
       onChange={(e) => setter(e.target.value)}
+      autoComplete={type === 'email' ? 'on' : 'off'}
       required
     />
   );

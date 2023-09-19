@@ -42,7 +42,7 @@ function Window({ children, name }: { children: ReactNode; name: string }) {
   return createPortal(
     <div>
       <Overlay />
-      <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+      <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[99]'>
         <button className='absolute right-5 top-1' onClick={close}>
           <FontAwesomeIcon
             icon={faClose}

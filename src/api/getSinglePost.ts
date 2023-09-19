@@ -27,6 +27,6 @@ export default async function getSinglePost(id: string) {
     return data.post;
   } catch (error) {
     console.error(error);
-    throw new Error('Could not get the post!');
+    throw new Error('Could not get the post.');
   }
 }

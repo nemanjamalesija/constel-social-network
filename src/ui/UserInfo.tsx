@@ -2,7 +2,7 @@ import UserImage from './UserImage';
 
 type UserInfoType = {
   full_name: string;
-  username: string;
+  username?: string;
   picture: string;
   imgClassname?: string;
   usernameClassname?: string;
@@ -22,7 +22,7 @@ const UserInfo = ({
       <UserImage src={picture} alt={full_name} imgClassname={imgClassname} />
       <div className='flex flex-col'>
         <span className={`text-figmaGrayShade text-sm ${usernameClassname}`}>
-          @{username}
+          {username && `@${username}`}
         </span>
         <h3
           className={`text-figmaBlack text-base font-medium ${fullNameClassname}`}

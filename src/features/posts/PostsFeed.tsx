@@ -37,13 +37,13 @@ const PostsParent = () => {
   if (loading) return <Spinner />;
 
   return (
-    <section className='flex flex-col md:gap-6 smb:gap-0'>
+    <div className='flex flex-col md:gap-6 smb:gap-0'>
       {posts.map((p) => (
         <PostProvider key={p.post_id} postProps={p}>
           <SinglePost />
         </PostProvider>
       ))}
-    </section>
+    </div>
   );
 };
 export default PostsParent;

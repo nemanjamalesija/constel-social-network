@@ -36,7 +36,7 @@ const WritePost = () => {
   };
 
   return (
-    <section className='py-4 px-6 md:bg-figmaGray smb:bg-#fff rounded-lg relative'>
+    <div className='py-4 px-6 md:bg-figmaGray smb:bg-#fff rounded-lg relative'>
       <form
         className='w-full '
         onSubmit={(e) => {
@@ -99,7 +99,7 @@ const WritePost = () => {
           </div>
         </div>
       </form>
-    </section>
+    </div>
   );
 };
 

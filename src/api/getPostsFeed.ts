@@ -27,6 +27,6 @@ export default async function getPostsFeed() {
     return { posts };
   } catch (error) {
     console.error(error);
-    throw new Error('Could not get posts!');
+    throw new Error('Could not get posts.');
   }
 }

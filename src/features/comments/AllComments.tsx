@@ -10,6 +10,7 @@ import { memo } from 'react';
 
 const AllComments = memo(() => {
   const { post_id } = usePost();
+
   const dispatch = useAppDispatch();
   const { comments } = useGetCommentsData();
   const [loading, setLoading] = useState(false);
@@ -18,12 +19,10 @@ const AllComments = memo(() => {
     (async () => {
       setLoading(true);
 
-      const commentsAPI = await getAllComments(post_id);
-      if (!commentsAPI) return;
-
-      const { comments } = commentsAPI;
-
-      comments && dispatch(setComments(comments));
+      const commentsApi = await getAllComments(post_id);
+      console.log(commentsApi);
+      dispatch(setComments(commentsApi));
+      console.log(comments);
       setLoading(false);
     })();
   }, []);

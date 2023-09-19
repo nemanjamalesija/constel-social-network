@@ -25,6 +25,6 @@ export default async function deleteComment(postId: string, commentId: string) {
     await response.json();
   } catch (error) {
     console.error(error);
-    throw new Error('Could not delete the comment!');
+    throw new Error('Could not delete the comment.');
   }
 }
