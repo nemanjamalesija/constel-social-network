@@ -1,7 +1,7 @@
 import UserInfo from '../../ui/UserInfo';
 import PostDate from '../../ui/PostDate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import deleteComment from '../../api/deleteComment';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removeComment } from './commentsSlice';
@@ -41,7 +41,11 @@ const SingleComment = memo(
     };
 
     return (
-      <article className='w-full border-b border-figmaGrayShade smb:relative'>
+      <article
+        className={`${
+          username === currentUserUsername ? 'pb-6' : ''
+        } w-full  smb:relative`}
+      >
         <div className='flex justify-between items-center'>
           <UserInfo
             username={username}
@@ -57,7 +61,8 @@ const SingleComment = memo(
             {/* if comment belongs to the current user allow delete */}
             {username === currentUserUsername && (
               <button
-                className='flex items-center gap-1 text-sm text-figmaRed capitalize   md:self-start'
+                className='flex items-center gap-1 text-sm text-figmaRed capitalize md:self-start smb:absolute hover:text-figmaRedShade smb:bottom-3 smb:left-1/2 
+                smb:text-sm smb:-translate-x-1/2 smb:translate-y-1/2'
                 onClick={() => {
                   deleteCommentHandler(post_id, comment_id);
                 }}

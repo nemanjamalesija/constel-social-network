@@ -29,7 +29,7 @@ const UserPopup = () => {
           />
         </button>
         <div
-          className={`absolute bg-red top-1/2 -right-[10%] opacity-1 translate-y-[32.9%] -translate-x-[30%] bg-figmaGrayLight rounded-lg text-figmaBlack shadow-md transition-all duration-150  origin-top-right  ${
+          className={`absolute bg-red top-1/2 -right-[10%] opacity-1 translate-y-[32.9%] -translate-x-[30%] bg-figmaGray rounded-lg text-figmaBlack shadow-lg transition-all duration-150  origin-top-right  ${
             account ? ins : outs
           }`}
           style={account ? {} : { transform: 'scale(0.95)' }}
@@ -37,7 +37,7 @@ const UserPopup = () => {
           <ul className='flex flex-col gap-3 px-2 '>
             {/* dummy list element */}
             <li
-              className={`flex items-center justify-start gap-4 pl-2 pr-12 py-[3px] hover:bg-figmaGray rounded-md cursor-pointer ${
+              className={`flex items-center justify-start gap-4 pl-2 pr-12 py-[3px] hover:bg-figmaGrayLight rounded-md cursor-pointer transition-colors duration-200 ${
                 ins ? 'flex' : 'hidden'
               }`}
               role='button'
@@ -58,7 +58,7 @@ const UserPopup = () => {
 
             {/* log out */}
             <li
-              className={`flex items-center justify-start gap-4 pl-2 pr-12 py-[3px] hover:bg-figmaGray rounded-md cursor-pointer ${
+              className={`flex items-center justify-start gap-4 pl-2 pr-12 py-[3px] hover:bg-figmaGrayLight rounded-md cursor-pointer transition-colors duration-200 ${
                 ins ? 'flex' : 'hidden'
               }`}
               onClick={logOutFront}
