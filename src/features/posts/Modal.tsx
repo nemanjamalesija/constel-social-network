@@ -10,6 +10,7 @@ import Overlay from '../../ui/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { createPortal } from 'react-dom';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const ModalContext = createContext({} as any);
 
@@ -39,12 +40,18 @@ function Open({ children, opens }: { children: ReactNode; opens: string }) {
 function Window({ children, name }: { children: ReactNode; name: string }) {
   const { openName, close } = useContext(ModalContext);
 
+  // close modal on overlay click
+  const modalRef = useOutsideClick(close, true);
+
   if (name !== openName) return null;
 
   return createPortal(
     <div>
       <Overlay />
-      <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[99]'>
+      <div
+        ref={modalRef}
+        className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[99]'
+      >
         <button className='absolute right-5 top-1' onClick={close}>
           <FontAwesomeIcon
             icon={faClose}
