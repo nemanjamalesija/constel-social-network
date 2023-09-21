@@ -51,8 +51,9 @@ const UserPopup = () => {
           </p>
         </a>
 
+        {/* setting href to # because of vercel deployment (avoid page not found error on redirect) otherwise, redirect should be to /login page */}
         <a
-          href='/login'
+          href='#'
           className='p-[0.4rem] pr-[4rem] rounded-lg hover:bg-figmaGrayShade  transition-all duration-200 inline-block animate-icon'
           onClick={logOutFront}
         >
