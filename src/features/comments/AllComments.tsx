@@ -20,9 +20,9 @@ const AllComments = memo(() => {
       setLoading(true);
 
       const commentsApi = await getAllComments(post_id);
-      console.log(commentsApi);
-      dispatch(setComments(commentsApi));
-      console.log(comments);
+
+      commentsApi && dispatch(setComments(commentsApi));
+
       setLoading(false);
     })();
   }, []);

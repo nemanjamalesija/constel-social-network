@@ -20,9 +20,9 @@ const UserPopup = () => {
   };
 
   const accountBase =
-    'absolute top-[118%] right-[16%] w-max max-h-0 flex flex-col gap-2 bg-figmaGray smb:bg-white  text-base rounded-md  shadow-lg transition-all duration-150 ease-in-out';
+    'absolute top-[118%] right-[16%] w-max flex flex-col gap-2 bg-figmaGray smb:bg-white  text-base rounded-md  shadow-lg transition-all duration-150 ease-in-out';
 
-  const opened = 'p-[0.8rem] max-h-[300px] opacity-1';
+  const opened = 'p-[0.8rem] opacity-1';
   const closed = 'invisible opacity-0';
 
   return (

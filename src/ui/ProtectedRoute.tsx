@@ -22,12 +22,11 @@ function ProtectedRoute({ children }: { children: ReactNode }) {
         setLoading(true);
         const account = await getCurrentUser();
 
+        if (!account) return;
+
         const { username, full_name, picture } = account;
 
-        username &&
-          dispatch(
-            setUser({ username, full_name, picture } as UserAccountType)
-          );
+        dispatch(setUser({ username, full_name, picture } as UserAccountType));
 
         setLoading(false);
       } catch (error) {

@@ -8,7 +8,7 @@ export default function useOutsideClick(
 
   useEffect(() => {
     const clickHandler = (e: any) => {
-      if (ref.current && ref.current !== e.currentTarget) {
+      if (ref.current && ref.current === e.target) {
         closeHandler();
       }
     };
