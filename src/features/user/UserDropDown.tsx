@@ -7,9 +7,6 @@ import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { setUser } from './userSlice';
 
-const ins = 'opacity-1  max-h-[300px] p-4';
-const outs = 'opacity-0 invisible max-h-0 ';
-
 const UserPopup = () => {
   const navigate = useNavigate();
   const { full_name, picture } = useGetUserData();
@@ -25,11 +22,11 @@ const UserPopup = () => {
   const accountBase =
     'absolute top-[118%] right-[16%] w-max max-h-0 flex flex-col gap-2 bg-figmaGray smb:bg-white  text-base rounded-md  shadow-lg transition-all duration-150 ease-in-out';
 
-  const opened = 'p-[0.8rem] max-h-[300px] visible opacity-1';
+  const opened = 'p-[0.8rem] max-h-[300px] opacity-1';
   const closed = 'invisible opacity-0';
 
   return (
-    <div className='absolute right-[5%] top-5 flex flex-col items-center gap-3 font-semibold rounded-lg z-[99]'>
+    <div className='absolute right-[5%] top-4 flex flex-col items-center gap-3 font-semibold rounded-lg z-[99]'>
       <button onClick={() => setIsUserPopupOpen(!userPopupOpen)}>
         <UserImage src={picture} alt={full_name} />
       </button>

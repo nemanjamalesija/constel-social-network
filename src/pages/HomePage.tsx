@@ -2,7 +2,7 @@ import WritePost from '../features/posts/WritePost';
 import HeadingPrimary from '../ui/HeadingPrimary';
 import PostsFeed from '../features/posts/PostsFeed';
 import Sidebar from '../ui/Sidebar';
-import UserPopup from '../features/user/UserPopup';
+import UserDropDown from '../features/user/UserDropDown';
 
 const HomePage = () => {
   return (
@@ -14,7 +14,7 @@ const HomePage = () => {
         <PostsFeed />
       </section>
 
-      <UserPopup />
+      <UserDropDown />
     </div>
   );
 };
