@@ -23,13 +23,13 @@ const UserPopup = () => {
   };
 
   const accountBase =
-    'absolute top-[118%] right-[16%] w-max max-h-0 flex flex-col gap-2 bg-figmaGray text-base rounded-md  shadow-lg transition-all duration-150 ease-in-out';
+    'absolute top-[118%] right-[16%] w-max max-h-0 flex flex-col gap-2 bg-figmaGray smb:bg-white  text-base rounded-md  shadow-lg transition-all duration-150 ease-in-out';
 
   const opened = 'p-[0.8rem] max-h-[300px] visible opacity-1';
   const closed = 'invisible opacity-0';
 
   return (
-    <div className='absolute right-[5%] top-5 flex flex-col items-center gap-3 font-semibold rounded-lg '>
+    <div className='absolute right-[5%] top-5 flex flex-col items-center gap-3 font-semibold rounded-lg z-[99]'>
       <button onClick={() => setIsUserPopupOpen(!userPopupOpen)}>
         <UserImage src={picture} alt={full_name} />
       </button>
@@ -47,7 +47,7 @@ const UserPopup = () => {
 '
         >
           <p className='flex items-center gap-2'>
-            <span className='h-9 w-9 flex items-center justify-center bg-white rounded-full '>
+            <span className='h-9 w-9 flex items-center justify-center bg-white smb:bg-figmaGray rounded-full '>
               <FontAwesomeIcon icon={faUser} className='text-figmaBlue' />
             </span>
             <span className='text-figmaBlack'>My profile</span>
@@ -56,11 +56,11 @@ const UserPopup = () => {
 
         <a
           href='/login'
-          className='p-[0.4rem] pr-[4rem] rounded-lg hover:bg-figmaGrayShade transition-all duration-200 inline-block animate-icon'
+          className='p-[0.4rem] pr-[4rem] rounded-lg hover:bg-figmaGrayShade  transition-all duration-200 inline-block animate-icon'
           onClick={logOutFront}
         >
           <p className='flex items-center gap-2 '>
-            <span className='h-9 w-9 flex items-center justify-center bg-white rounded-full '>
+            <span className='h-9 w-9 flex items-center justify-center bg-white smb:bg-figmaGray rounded-full '>
               <FontAwesomeIcon
                 icon={faRightFromBracket}
                 className='text-figmaBlue'
