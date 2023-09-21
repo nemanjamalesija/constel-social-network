@@ -59,3 +59,7 @@ input[type='range']::-ms-thumb {
 .input-comment:focus + button > svg:hover {
   color: #005bca;
 }
+
+.animate-icon:hover > p span > svg {
+  color: #005bca;
+}

@@ -23,7 +23,7 @@ const UserPopup = () => {
   };
 
   const accountBase =
-    'absolute top-[118%] right-[16%] bg-figmaGray flex flex-col text-base gap-2 rounded-md w-max max-h-0 shadow-lg transition-all duration-150 ease-in-out';
+    'absolute top-[118%] right-[16%] w-max max-h-0 flex flex-col gap-2 bg-figmaGray text-base rounded-md  shadow-lg transition-all duration-150 ease-in-out';
 
   const opened = 'p-[0.8rem] max-h-[300px] visible opacity-1';
   const closed = 'invisible opacity-0';
@@ -43,10 +43,11 @@ const UserPopup = () => {
       >
         <a
           href='#'
-          className='p-[0.4rem] pr-[4rem] rounded-lg hover:bg-figmaGrayShade transition-all duration-200 inline-block'
+          className='p-[0.4rem] pr-[4rem] rounded-lg hover:bg-figmaGrayShade transition-all duration-200 inline-block animate-icon
+'
         >
           <p className='flex items-center gap-2'>
-            <span className='bg-white rounded-full h-9 w-9 flex items-center justify-center'>
+            <span className='h-9 w-9 flex items-center justify-center bg-white rounded-full '>
               <FontAwesomeIcon icon={faUser} className='text-figmaBlue' />
             </span>
             <span className='text-figmaBlack'>My profile</span>
@@ -55,11 +56,11 @@ const UserPopup = () => {
 
         <a
           href='/login'
-          className='p-[0.4rem] pr-[4rem] rounded-lg hover:bg-figmaGrayShade transition-all duration-200 inline-block'
+          className='p-[0.4rem] pr-[4rem] rounded-lg hover:bg-figmaGrayShade transition-all duration-200 inline-block animate-icon'
           onClick={logOutFront}
         >
-          <p className='flex items-center gap-2'>
-            <span className='bg-white rounded-full h-9 w-9 flex items-center justify-center'>
+          <p className='flex items-center gap-2 '>
+            <span className='h-9 w-9 flex items-center justify-center bg-white rounded-full '>
               <FontAwesomeIcon
                 icon={faRightFromBracket}
                 className='text-figmaBlue'
