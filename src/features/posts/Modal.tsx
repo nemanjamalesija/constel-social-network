@@ -10,7 +10,6 @@ import Overlay from '../../ui/Overlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { createPortal } from 'react-dom';
-import useOutsideClick from '../../hooks/useOutsideClick';
 
 const ModalContext = createContext({} as any);
 
