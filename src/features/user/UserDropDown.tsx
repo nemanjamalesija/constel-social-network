@@ -27,8 +27,8 @@ const UserPopup = () => {
 
   return (
     <div className='absolute right-[5%] top-4 flex flex-col items-center gap-3 font-semibold rounded-lg z-[99]'>
-      <button onClick={() => setIsUserPopupOpen(!userPopupOpen)}>
-        <UserImage src={picture} alt={full_name} />
+      <button className='' onClick={() => setIsUserPopupOpen(!userPopupOpen)}>
+        <UserImage src={picture} alt={full_name} imgClassname='shadow-lg' />
       </button>
 
       <div
