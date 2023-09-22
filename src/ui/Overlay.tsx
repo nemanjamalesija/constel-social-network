@@ -2,7 +2,7 @@ import useOutsideClick from '../hooks/useOutsideClick';
 
 const Overlay = ({ close }: { close: () => void }) => {
   // close modal on overlay click
-  const overlayRef = useOutsideClick(close, true);
+  const overlayRef = useOutsideClick(close);
 
   return (
     <div
