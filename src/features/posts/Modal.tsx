@@ -11,10 +11,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { createPortal } from 'react-dom';
 
-const ModalContext = createContext({} as any);
+type ModalContextType = {
+  openName: string;
+  open: React.Dispatch<React.SetStateAction<string>>;
+  close: () => void;
+};
+
+const ModalContext = createContext({} as ModalContextType);
 
 function Modal({ children }: { children: ReactNode }) {
-  const [openName, setOpenName] = useState('');
+  const [openName, setOpenName] = useState<string>('');
 
   // references 2 states of setOpen function
   // used to controll open and close state of modal

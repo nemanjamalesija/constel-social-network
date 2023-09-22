@@ -16,13 +16,13 @@ const CommentButton = ({ type }: { type: string }) => {
   if (type == 'modal')
     return (
       <Modal>
-        <Modal.Open opens='post-comments'>
+        <Modal.Open opens='post-modal'>
           <button className={`${baseStyle} ${colorsDefault}`}>
             <FontAwesomeIcon icon={faComment} />
             <span>{comments}</span>
           </button>
         </Modal.Open>
-        <Modal.Window name='post-comments'>
+        <Modal.Window name='post-modal'>
           <PostModal />
         </Modal.Window>
       </Modal>

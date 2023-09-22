@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { setUser } from './userSlice';
 
-const UserPopup = () => {
+const UserDropDown = () => {
   const navigate = useNavigate();
   const { full_name, picture } = useGetUserData();
-  const [userPopupOpen, setIsUserPopupOpen] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const logOutFront = () => {
@@ -27,13 +27,13 @@ const UserPopup = () => {
 
   return (
     <div className='absolute right-[5%] top-4 flex flex-col items-center gap-3 font-semibold rounded-lg z-[99]'>
-      <button className='' onClick={() => setIsUserPopupOpen(!userPopupOpen)}>
+      <button className='' onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
         <UserImage src={picture} alt={full_name} imgClassname='shadow-lg' />
       </button>
 
       <div
         className={`${
-          userPopupOpen
+          isDropdownOpen
             ? `${accountBase} ${opened}`
             : `${accountBase} ${closed}`
         }`}
@@ -72,4 +72,4 @@ const UserPopup = () => {
   );
 };
 
-export default UserPopup;
+export default UserDropDown;
