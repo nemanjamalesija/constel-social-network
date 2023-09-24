@@ -18,7 +18,7 @@ const AudioPlayer = ({
   const [playing, setPlaying] = useState<boolean>(false);
   const [trackProgress, setTrackProgress] = useState<number>(0);
   const animationFrameRef = useRef<number>();
-  const [currTime, setCurrTime] = useState('');
+  const [currTime, setCurrTime] = useState<string>('');
 
   useEffect(() => {
     const animate = () => {
