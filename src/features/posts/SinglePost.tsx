@@ -8,7 +8,7 @@ import PostImage from '../../ui/PostImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { useGetUserData } from '../../hooks/useGetUserData';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import deletePost from '../../api/deletePost';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removePost } from './postsSlice';
@@ -25,7 +25,6 @@ const SinglePost = memo(() => {
   } = usePost();
   const { username: currentUserUsername } = useGetUserData();
   const dispatch = useAppDispatch();
-
   const deletePostHandler = async () => {
     const status = await deletePost(post_id);
 

@@ -18,17 +18,14 @@ const AudioPlayer = ({
   const [playing, setPlaying] = useState<boolean>(false);
   const [trackProgress, setTrackProgress] = useState<number>(0);
   const animationFrameRef = useRef<number>();
-  const [currTime, setCurrTime] = useState<string>('');
 
   useEffect(() => {
     const animate = () => {
       if (audio.ended) {
         setPlaying(false);
         setTrackProgress(0);
-        setCurrTime('00:00');
         cancelAnimationFrame(animationFrameRef.current as number);
       } else {
-        setCurrTime(formatTime(audio.currentTime));
         setTrackProgress(audio.currentTime);
         animationFrameRef.current = requestAnimationFrame(animate);
       }
@@ -89,7 +86,9 @@ const AudioPlayer = ({
         )}
         {/* audio duration and time left */}
         <div className='flex items-center gap-1 pl-5 text-figmaGrayShade'>
-          <span>{currTime ? currTime : '00:00'} </span>
+          <span>
+            {audio.currentTime ? formatTime(audio.currentTime) : '00:00'}{' '}
+          </span>
           <span>/</span>
           <span>
             <span>
