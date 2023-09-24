@@ -20,19 +20,6 @@ const AudioPlayer = ({
   const animationFrameRef = useRef<number>();
   const [currTime, setCurrTime] = useState('');
 
-  const animate = () => {
-    if (audio.ended) {
-      setPlaying(false);
-      setTrackProgress(0);
-      setCurrTime('00:00');
-      cancelAnimationFrame(animationFrameRef.current as number);
-    } else {
-      setCurrTime(formatTime(audio.currentTime));
-      setTrackProgress(audio.currentTime);
-      animationFrameRef.current = requestAnimationFrame(animate);
-    }
-  };
-
   useEffect(() => {
     const animate = () => {
       if (audio.ended) {
@@ -43,7 +30,7 @@ const AudioPlayer = ({
       } else {
         setCurrTime(formatTime(audio.currentTime));
         setTrackProgress(audio.currentTime);
-        animationFrameRef.current = requestAnimationFrame(animate);
+        animationFrameRef.current = setInterval(animate, 1000);
       }
     };
 
@@ -51,7 +38,7 @@ const AudioPlayer = ({
       try {
         audio.play();
         setPlaying(true);
-        animationFrameRef.current = requestAnimationFrame(animate);
+        animationFrameRef.current = setInterval(animate, 1000);
       } catch (error) {
         console.error('Error playing audio:', error);
         setPlaying(false);
@@ -64,12 +51,14 @@ const AudioPlayer = ({
       audio.pause();
       setPlaying(false);
       cancelAnimationFrame(animationFrameRef.current as number);
+      clearInterval(animationFrameRef.current as number);
     }
 
     // Cleanup function
     return () => {
       audio.pause();
       cancelAnimationFrame(animationFrameRef.current as number);
+      clearInterval(animationFrameRef.current as number);
     };
   }, [playing, audio]);
 
