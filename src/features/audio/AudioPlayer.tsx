@@ -30,7 +30,7 @@ const AudioPlayer = ({
       } else {
         setCurrTime(formatTime(audio.currentTime));
         setTrackProgress(audio.currentTime);
-        animationFrameRef.current = setInterval(animate, 1000);
+        animationFrameRef.current = requestAnimationFrame(animate);
       }
     };
 
@@ -38,7 +38,7 @@ const AudioPlayer = ({
       try {
         audio.play();
         setPlaying(true);
-        animationFrameRef.current = setInterval(animate, 1000);
+        animationFrameRef.current = requestAnimationFrame(animate);
       } catch (error) {
         console.error('Error playing audio:', error);
         setPlaying(false);
@@ -51,14 +51,12 @@ const AudioPlayer = ({
       audio.pause();
       setPlaying(false);
       cancelAnimationFrame(animationFrameRef.current as number);
-      clearInterval(animationFrameRef.current as number);
     }
 
     // Cleanup function
     return () => {
       audio.pause();
       cancelAnimationFrame(animationFrameRef.current as number);
-      clearInterval(animationFrameRef.current as number);
     };
   }, [playing, audio]);
 
