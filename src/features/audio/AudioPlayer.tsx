@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AudioControls from './AudioControls';
 import formatTime from '../../helpers/formatTime';
 
@@ -17,42 +17,51 @@ const AudioPlayer = ({
   const [audio] = useState(new Audio(audioSrc));
   const [playing, setPlaying] = useState<boolean>(false);
   const [trackProgress, setTrackProgress] = useState<number>(0);
+  const animationFrameRef = useRef<number>();
+  const [currTime, setCurrTime] = useState('');
 
   useEffect(() => {
-    let interval: any;
+    const animate = () => {
+      if (audio.ended) {
+        setPlaying(false);
+        setTrackProgress(0);
+        setCurrTime('00:00');
+        cancelAnimationFrame(animationFrameRef.current as number);
+      } else {
+        setCurrTime(formatTime(audio.currentTime));
+        setTrackProgress(audio.currentTime);
+        animationFrameRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    const startPlayback = async () => {
+      try {
+        await audio.play();
+        setPlaying(true);
+        animationFrameRef.current = requestAnimationFrame(animate);
+      } catch (error) {
+        console.error('Error playing audio:', error);
+        setPlaying(false);
+      }
+    };
 
     if (playing) {
-      audio.play();
-      interval = startTimer();
+      startPlayback();
     } else {
-      clearInterval(interval); // Clear the interval when not playing
       audio.pause();
+      setPlaying(false);
+      cancelAnimationFrame(animationFrameRef.current as number);
     }
 
-    // Cleanup the interval on component unmount
-    return () => clearInterval(interval);
+    // Cleanup function
+    return () => {
+      audio.pause();
+      cancelAnimationFrame(animationFrameRef.current as number);
+    };
   }, [playing, audio]);
 
-  useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
-
-  const startTimer = () => {
-    const interval = setInterval(() => {
-      if (audio.ended) {
-        clearInterval(interval); // Clear the interval when audio ends
-        setTrackProgress(0);
-      } else {
-        setTrackProgress(audio.currentTime);
-      }
-    }, 1000);
-  };
-
   return (
-    <div className='py-6 px-4 bg-figmaGrayPlayer rounded-lg mb-3 overflow-hidden col-start-1 col-span-3 row-start-1'>
+    <div className='col-span-3 col-start-1 row-start-1 px-4 py-6 mb-3 overflow-hidden rounded-lg bg-figmaGrayPlayer'>
       <audio src={audioSrc}></audio>
 
       <div className='flex items-center h-full'>
@@ -78,13 +87,13 @@ const AudioPlayer = ({
           />
         )}
         {/* audio duration and time left */}
-        <div className='flex items-center gap-1 text-figmaGrayShade pl-5'>
-          <span>{formatTime(audio.currentTime)}</span>
+        <div className='flex items-center gap-1 pl-5 text-figmaGrayShade'>
+          <span>{currTime ? currTime : '00:00'} </span>
           <span>/</span>
           <span>
             <span>
               {isNaN(audio.duration) || !isFinite(audio.duration)
-                ? '0.00'
+                ? '00.00'
                 : formatTime(audio.duration)}
             </span>
           </span>
