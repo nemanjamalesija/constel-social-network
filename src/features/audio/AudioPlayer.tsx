@@ -20,6 +20,19 @@ const AudioPlayer = ({
   const animationFrameRef = useRef<number>();
   const [currTime, setCurrTime] = useState('');
 
+  const animate = () => {
+    if (audio.ended) {
+      setPlaying(false);
+      setTrackProgress(0);
+      setCurrTime('00:00');
+      cancelAnimationFrame(animationFrameRef.current as number);
+    } else {
+      setCurrTime(formatTime(audio.currentTime));
+      setTrackProgress(audio.currentTime);
+      animationFrameRef.current = requestAnimationFrame(animate);
+    }
+  };
+
   useEffect(() => {
     const animate = () => {
       if (audio.ended) {
@@ -34,9 +47,9 @@ const AudioPlayer = ({
       }
     };
 
-    const startPlayback = async () => {
+    const startPlayback = () => {
       try {
-        await audio.play();
+        audio.play();
         setPlaying(true);
         animationFrameRef.current = requestAnimationFrame(animate);
       } catch (error) {
@@ -71,6 +84,7 @@ const AudioPlayer = ({
           recording={recording}
           handleStopRecording={handleStopRecording}
         />
+
         {/* if recording render straight line */}
         {recording ? (
           <hr className='w-full h-[2px] bg-figmaGrayShade'></hr>
