@@ -8,7 +8,7 @@ import PostImage from '../../ui/PostImage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { useGetUserData } from '../../hooks/useGetUserData';
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import deletePost from '../../api/deletePost';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removePost } from './postsSlice';
