@@ -23,8 +23,8 @@ const PostsParent = () => {
           const { posts } = postsAPI;
 
           posts && dispatch(setPosts(posts as PostsType));
-          setLoading(false);
         }
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching posts:', error);
         setLoading(false);
