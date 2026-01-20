@@ -5,34 +5,35 @@ import LikeButton from '../post/LikeButton';
 import CommentButton from '../post/CommentButton';
 import AudioPlayer from '../audio/AudioPlayer';
 import PostImage from '../../ui/PostImage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { useGetUserData } from '../../hooks/useGetUserData';
 import { memo } from 'react';
+import { useGetUserData } from '../../hooks/useGetUserData';
+/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import deletePost from '../../api/deletePost';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { removePost } from './postsSlice';
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'; */
 
+//Staviti da ima samo jedan loading spinner prije ucitavanja
 const SinglePost = memo(() => {
   const {
-    post_id,
     audio,
     image,
     text,
     created_at,
-    user: { username, full_name, picture },
+    user
   } = usePost();
   const { username: currentUserUsername } = useGetUserData();
-  const dispatch = useAppDispatch();
-  const deletePostHandler = async () => {
+  /* const dispatch = useAppDispatch(); */
+  const {username, full_name, picture} = user;
+  /* const deletePostHandler = async () => {
     const status = await deletePost(post_id);
 
     status == 200 &&
       dispatch(removePost(post_id)) &&
       toast.success('Post succesfully deleted.');
-  };
-
+  }; */
+  
   return (
     <article
       className={`${
@@ -47,7 +48,7 @@ const SinglePost = memo(() => {
         <div className='flex items-center gap-3 '>
           <PostDate created_at={created_at} />
           {/* if post belongs to the current user allow delete */}
-          {username == currentUserUsername && (
+          {/* username == currentUserUsername && (
             <button
               className='flex items-center gap-1 text-sm text-figmaRed hover:text-figmaRedShade capitalize  md:self-start smb:absolute smb:-bottom-5 smb:left-1/2 
               smb:text-base smb:-translate-x-1/2 smb:translate-y-1/2 '
@@ -56,7 +57,7 @@ const SinglePost = memo(() => {
               <FontAwesomeIcon icon={faTrashCan} />
               <span>delete</span>
             </button>
-          )}
+          ) */}
         </div>
       </div>
 
@@ -72,7 +73,7 @@ const SinglePost = memo(() => {
 
       <div className='flex gap-2 justify-between sm:justify-start'>
         <LikeButton />
-        <CommentButton type='modal' />
+        <CommentButton type='modal' user={user}/>
       </div>
     </article>
   );

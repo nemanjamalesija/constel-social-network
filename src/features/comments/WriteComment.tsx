@@ -3,23 +3,33 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import createComment from '../../api/createComment';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { addNewComment } from './commentsSlice';
+import { setComments } from './commentsSlice';
 import { memo } from 'react';
 import toast from 'react-hot-toast';
+import getAllComments from '../../api/getAllComments';
 
 const WriteComment = memo(({ post_id }: { post_id: string }) => {
   const dispatch = useAppDispatch();
   const [commentText, setCommentText] = useState<string>('');
-
+  
   const submitHandler = async () => {
     if (!commentText.trim())
       return toast.error('Text comment cannot be empty!');
-
-    const comment = await createComment(post_id, commentText);
-
-    comment && dispatch(addNewComment(comment));
+    updateComments();
     setCommentText('');
   };
+
+  const updateComments = async() => {
+    try{
+      //Return of createComment is always undefined
+      await createComment(post_id, commentText);
+      const commentsApi = await getAllComments(post_id);
+      dispatch(setComments(commentsApi));
+    }
+    catch(error){
+      toast.error('Failed to post comment!');
+    }
+  }
 
   return (
     <form
